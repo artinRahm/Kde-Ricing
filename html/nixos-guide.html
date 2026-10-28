@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete guide to installing and ricing KDE Plasma on NixOS with flakes and Home Manager">
+    <title>NixOS KDE Plasma Ricing Guide</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/guide.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </div>
+
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="../index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span class="logo-text">KDE Rice</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="arch-guide.html">Arch Linux</a></li>
+                <li><a href="nixos-guide.html" class="active">NixOS</a></li>
+                <li><a href="tools.html">Tools & Resources</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="troubleshooting.html">Troubleshooting</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="guide-main">
+        <nav class="guide-sidebar" id="guideSidebar">
+            <div class="sidebar-header">
+                <h3>NixOS Guide</h3>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="#intro" class="sidebar-link">1. NixOS Philosophy</a></li>
+                <li><a href="#installation" class="sidebar-link">2. Installation</a></li>
+                <li><a href="#flakes" class="sidebar-link">3. Flakes Setup</a></li>
+                <li><a href="#kde-config" class="sidebar-link">4. KDE Configuration</a></li>
+                <li><a href="#home-manager" class="sidebar-link">5. Home Manager</a></li>
+                <li><a href="#theming" class="sidebar-link">6. Declarative Theming</a></li>
+                <li><a href="#advanced" class="sidebar-link">7. Advanced Ricing</a></li>
+                <li><a href="#maintenance" class="sidebar-link">8. Maintenance</a></li>
+            </ul>
+        </nav>
+
+        <div class="guide-content">
+            <article class="guide-article">
+                <header class="guide-header">
+                    <div class="guide-breadcrumbs">
+                        <a href="../index.html">Home</a>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        <a href="nixos-guide.html">NixOS</a>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        <span>Introduction</span>
+                    </div>
+                    <h1>NixOS KDE Plasma Ricing Guide</h1>
+                    <p class="guide-description">Declarative, reproducible KDE Plasma ricing on NixOS using Flakes and Home Manager</p>
+                    <div class="guide-meta">
+                        <span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> ~50 min read</span>
+                        <span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Advanced</span>
+                        <span class="meta-item badge badge-nixos">NixOS</span>
+                    </div>
+                </header>
+
+                <section id="intro" class="guide-section">
+                    <h2>1. Why NixOS for Ricing?</h2>
+                    <p>NixOS brings a fundamentally different approach to system configuration that's perfect for ricing:</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            </div>
+                            <h4>Declarative Configuration</h4>
+                            <p>Your entire system state (packages, services, configs) is defined in code. No manual changes that get lost.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                            </div>
+                            <h4>Atomic Rollbacks</h4>
+                            <p>Every change creates a new generation. Boot into previous generations instantly if something breaks.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            </div>
+                            <h4>Reproducible Builds</h4>
+                            <p>Same config = identical system. Share your rice as a git repo; others get exactly your setup.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                            </div>
+                            <h4>Home Manager</h4>
+                            <p>Manage user-level config (dotfiles, plasma config, themes) declaratively alongside system config.</p>
+                        </div>
+                    </div>
+
+                    <div class="note-box warning">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        <div>
+                            <strong>Learning Curve:</strong> NixOS requires learning the Nix language and its ecosystem. Expect a steeper initial investment but massive long-term payoff for ricing.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="installation" class="guide-section">
+                    <h2>2. NixOS Installation</h2>
+
+                    <div class="step">
+                        <h3>2.1 Download & Boot</h3>
+                        <p>Download the NixOS ISO (Plasma/KDE variant recommended) from <a href="https://nixos.org/download.html" target="_blank">nixos.org</a>.</p>
+                        <pre><code class="language-bash"># Write to USB (replace sdX)
+sudo dd if=nixos-plasma-*.iso of=/dev/sdX bs=4M status=progress && sync</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>2.2 Partition (UEFI Example)</h3>
+                        <pre><code class="language-bash"># Using disko (declarative partitioning) - recommended
+# Or manual with fdisk/cfdisk
+
+# Manual example:
+cfdisk /dev/nvme0n1
+# Create: EFI (1G, type EFI), Root (rest, Linux filesystem)
+
+mkfs.fat -F32 /dev/nvme0n1p1
+mkfs.btrfs -L nixos /dev/nvme0n1p2
+
+# Mount with subvolumes (btrfs)
+mount /dev/nvme0n1p2 /mnt
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@home
+btrfs subvolume create /mnt/@nix
+btrfs subvolume create /mnt/@log
+btrfs subvolume create /mnt/@snapshots
+umount /mnt
+
+mount -o subvol=@,compress=zstd,noatime /dev/nvme0n1p2 /mnt
+mkdir -p /mnt/{home,nix,var/log,.snapshots,boot}
+mount -o subvol=@home,compress=zstd,noatime /dev/nvme0n1p2 /mnt/home
+mount -o subvol=@nix,compress=zstd,noatime /dev/nvme0n1p2 /mnt/nix
+mount -o subvol=@log,compress=zstd,noatime /dev/nvme0n1p2 /mnt/var/log
+mount -o subvol=@snapshots,compress=zstd,noatime /dev/nvme0n1p2 /mnt/.snapshots
+mount /dev/nvme0n1p1 /mnt/boot</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>2.3 Generate Initial Config</h3>
+                        <pre><code class="language-bash">nixos-generate-config --root /mnt --no-filesystems
+
+# Edit configuration.nix
+nano /mnt/etc/nixos/configuration.nix</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>2.4 Minimal configuration.nix</h3>
+                        <pre><code class="language-nix">{ config, pkgs, ... }:
+
+{
+  imports = [ ./hardware-configuration.nix ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "nixos-rice";
+  networking.networkmanager.enable = true;
+
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # KDE Plasma
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma6.enable = true;
+
+  # Graphics (choose one)
+  # hardware.opengl.enable = true;  # Intel/AMD
+  # services.xserver.videoDrivers = [ "nvidia" ];  # NVIDIA
+
+  # User
+  users.users.youruser = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "video" ];
+    packages = with pkgs; [ git vim ];
+  };
+
+  # Allow unfree (for NVIDIA, codecs, etc.)
+  nixpkgs.config.allowUnfree = true;
+
+  system.stateVersion = "24.05";
+}</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>2.5 Install & Reboot</h3>
+                        <pre><code class="language-bash">nixos-install --root /mnt --flake /mnt/etc/nixos#nixos-rice
+# Or without flakes initially:
+# nixos-install --root /mnt
+
+reboot</code></pre>
+                    </div>
+                </section>
+
+                <section id="flakes" class="guide-section">
+                    <h2>3. Flakes: Modern NixOS Configuration</h2>
+
+                    <div class="step">
+                        <h3>3.1 Flake Structure</h3>
+                        <pre><code class="language-bash"># Create flake structure
+mkdir -p ~/nixos-config/{hosts,modules,home,overlays}
+cd ~/nixos-config
+git init</code></pre>
+
+                        <div class="file-tree">
+                            <span class="file">nixos-config/</span>
+                            <span class="file">├── flake.nix</span>
+                            <span class="file">├── flake.lock</span>
+                            <span class="file">├── hosts/</span>
+                            <span class="file">│   └── desktop/</span>
+                            <span class="file">│       ├── configuration.nix</span>
+                            <span class="file">│       └── hardware-configuration.nix</span>
+                            <span class="file">├── modules/</span>
+                            <span class="file">│   ├── kde.nix</span>
+                            <span class="file">│   ├── graphics.nix</span>
+                            <span class="file">│   ├── audio.nix</span>
+                            <span class="file">│   └── theming.nix</span>
+                            <span class="file">└── home/</span>
+                            <span class="file">    ├── home.nix</span>
+                            <span class="file">    └── programs/</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>3.2 flake.nix</h3>
+                        <pre><code class="language-nix">{
+  description = "NixOS KDE Rice Configuration";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    plasma-themes = {
+      url = "github:EliverLara/Nordic-kde";
+      flake = false;
+    };
+    # Add more theme repos as needed
+  };
+
+  outputs = { self, nixpkgs, home-manager, plasma-themes, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+      lib = nixpkgs.lib;
+    in {
+      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+        system = system;
+        modules = [
+          ({ pkgs, ... }: {
+            imports = [ ./hosts/desktop/configuration.nix ];
+            nixpkgs.config.allowUnfree = true;
+          })
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [ ./home/home.nix ];
+          }
+        ];
+      };
+    };
+}</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>3.3 hosts/desktop/configuration.nix</h3>
+                        <pre><code class="language-nix">{ config, pkgs, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+    ../modules/kde.nix
+    ../modules/graphics.nix
+    ../modules/audio.nix
+    ../modules/theming.nix
+  ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "nixos-rice";
+  networking.networkmanager.enable = true;
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
+
+  users.users.youruser = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "video" "docker" ];
+  };
+
+  system.stateVersion = "24.05";
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="kde-config" class="guide-section">
+                    <h2>4. KDE Plasma Configuration (modules/kde.nix)</h2>
+                    <pre><code class="language-nix">{ config, pkgs, ... }:
+
+{
+  # Enable Plasma 6
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma6.enable = true;
+
+  # Wayland session
+  services.xserver.desktopManager.plasma6.wayland = true;
+
+  # Essential packages
+  environment.systemPackages = with pkgs; [
+    plasma6.packages.plasma-browser-integration
+    plasma6.packages.kde-gtk-config
+    plasma6.packages.kwin
+    plasma6.packages.kvantum
+    plasma6.packages.kvantum-qt5
+    plasma6.packages.kvantum-qt6
+    plasma6.packages.kdeconnect
+    plasma6.packages.plasma-workspace
+    plasma6.packages.systemsettings
+    plasma6.packages.konsole
+    plasma6.packages.dolphin
+    plasma6.packages.kwrite
+    plasma6.packages.firefox
+    # Ricing tools
+    plasma6.packages.latte-dock
+    plasma6.packages.krohnkite
+    plasma6.packages.bismuth
+  ];
+
+  # KDE Global config via systemd user services
+  systemd.user.services.plasma-config = {
+    description = "Apply KDE Plasma configuration";
+    wantedBy = [ "plasma-workspace.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      Environment = [ "DISPLAY=:0" ];
+    };
+    script = ''
+      ${pkgs.plasma6.packages.kwriteconfig6}/bin/kwriteconfig6 \
+        --file kdeglobals --group General --key Font "Noto Sans,10,-1,5,50,0,0,0,0,0"
+      ${pkgs.plasma6.packages.kwriteconfig6}/bin/kwriteconfig6 \
+        --file kdeglobals --group General --key Fixed "JetBrains Mono,10,-1,5,50,0,0,0,0,0"
+      ${pkgs.plasma6.packages.plasma-apply-colorscheme}/bin/plasma-apply-colorscheme Nordic
+      ${pkgs.plasma6.packages.kvantummanager}/bin/kvantummanager --set Nordic
+    '';
+  };
+
+  # Enable PipeWire
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+  security.rtkit.enable = true;
+}</code></pre>
+                </section>
+
+                <section id="home-manager" class="guide-section">
+                    <h2>5. Home Manager: Declarative User Config</h2>
+
+                    <div class="step">
+                        <h3>5.1 home/home.nix</h3>
+                        <pre><code class="language-nix">{ config, pkgs, ... }:
+
+{
+  home.username = "youruser";
+  home.homeDirectory = "/home/youruser";
+  home.stateVersion = "24.05";
+
+  # Enable programs
+  programs.git.enable = true;
+  programs.vim.enable = true;
+  programs.zsh.enable = true;
+  programs.bash.enable = true;
+
+  # Fonts
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-emoji
+    ttf-jetbrains-mono
+    ttf-firacode-nerd
+    ttf-cascadia-code-nerd
+  ];
+
+  # Plasma config files
+  home.file.".config/kdeglobals" = {
+    source = ./plasma/kdeglobals;
+  };
+
+  home.file.".config/kwinrc" = {
+    source = ./plasma/kwinrc;
+  };
+
+  home.file.".config/kvantum/kvantum.kvconfig" = {
+    source = ./plasma/kvantum.kvconfig;
+  };
+
+  # Plasma applets layout
+  home.file.".config/plasma-org.kde.plasma.desktop-appletsrc" = {
+    source = ./plasma/plasma-appletsrc;
+  };
+
+  # Color schemes
+  home.file.".local/share/color-schemes/Nordic.colors" = {
+    source = ./plasma/colors/Nordic.colors;
+  };
+
+  # KWin scripts
+  home.file.".local/share/kwin/scripts/krohnkite" = {
+    source = ./plasma/kwin/krohnkite;
+    recursive = true;
+  };
+
+  # Latte dock layouts
+  home.file.".local/share/latte/layouts/my-layout.layout.latte" = {
+    source = ./plasma/latte/my-layout.layout.latte;
+  };
+
+  # Environment variables
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "kde";
+    QT_STYLE_OVERRIDE = "kvantum";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
+
+  # Packages
+  home.packages = with pkgs; [
+    neovim
+    btop
+    fastfetch
+    fd
+    ripgrep
+    fzf
+    zoxide
+    direnv
+    # Ricing tools
+    plasma6.packages.plasmastyle
+  ];
+}</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>5.2 Plasma Config Files (home/plasma/kdeglobals)</h3>
+                        <pre><code class="language-ini">[General]
+Font=Noto Sans,10,-1,5,50,0,0,0,0,0
+Fixed=JetBrains Mono,10,-1,5,50,0,0,0,0,0
+MenuFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+SmallestReadableFont=Noto Sans,8,-1,5,50,0,0,0,0,0
+ToolBarFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+taskbarFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+windowTitleFont=Noto Sans,10,-1,5,50,0,0,0,0,0
+
+[KDE]
+SingleClick=false
+ShowDeleteCommand=true
+
+[KFileDialog Settings]
+Automatically select folders=true
+Breadcrumb Navigation=true
+
+[PreviewSettings]
+RemotePreview=local
+ShowPreview=true
+MaximumRemoteSize=1000000
+</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>5.3 KWin Config (home/plasma/kwinrc)</h3>
+                        <pre><code class="language-ini">[Windows]
+BorderlessMaximizedWindows=true
+ElectricBorderMaximize=true
+ElectricBorderCornerRatio=0.25
+ElectricBorderDelay=150
+RollOverDesktops=true
+FocusPolicy=ClickToFocus
+RaiseOnDesktopChange=true
+
+[Compositing]
+Enabled=true
+Backend=OpenGL
+GraphicsResetNotification=true
+OpenGLIsUnsafe=false
+MaxFPS=144
+RefreshRate=144
+VSync=true
+UseVSync=true
+
+[Effect-Cube]
+BorderColor=#2e3440
+BorderWidth=0
+
+[Effect-DesktopGrid]
+LayoutMode=0
+
+[Effect-KWin4EffectPresentWindows]
+LayoutMode=0
+
+[Plugins]
+krohnkiteEnabled=true
+bismuthEnabled=false
+
+[Script-krohnkite]
+active=true
+</code></pre>
+                    </div>
+                </section>
+
+                <section id="theming" class="guide-section">
+                    <h2>6. Declarative Theming</h2>
+
+                    <div class="step">
+                        <h3>6.1 Custom Theme Module (modules/theming.nix)</h3>
+                        <pre><code class="language-nix">{ config, pkgs, ... }:
+
+let
+  # Custom theme package
+  nordic-theme = pkgs.stdenv.mkDerivation {
+    name = "nordic-kde-theme";
+    src = pkgs.fetchFromGitHub {
+      owner = "EliverLara";
+      repo = "Nordic-kde";
+      rev = "v4.0";
+      sha256 = "sha256-...";
+    };
+    dontBuild = true;
+    installPhase = ''
+      mkdir -p $out/share/plasma/look-and-feel
+      cp -r Nordic $out/share/plasma/look-and-feel/
+    '';
+  };
+
+  catppuccin-theme = pkgs.fetchFromGitHub {
+    owner = "catppuccin";
+    repo = "kde";
+    rev = "v1.0.0";
+    sha256 = "sha256-...";
+  };
+in {
+  environment.systemPackages = [ nordic-theme catppuccin-theme ];
+
+  # Apply theme via systemd user service
+  systemd.user.services.apply-theme = {
+    description = "Apply KDE Global Theme";
+    wantedBy = [ "plasma-workspace.target" ];
+    after = [ "plasma-workspace.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      Environment = [ "DISPLAY=:0" "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus" ];
+    };
+    script = ''
+      ${pkgs.plasma6.packages.plasma-apply-lookandfeel}/bin/plasma-apply-lookandfeel -a "Nordic"
+    '';
+  };
+}</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>6.2 Color Scheme Management</h3>
+                        <pre><code class="language-nix"># Add to home.nix
+home.file.".local/share/color-schemes/Catppuccin-Mocha.colors".source = ./plasma/colors/Catppuccin-Mocha.colors;
+home.file.".local/share/color-schemes/Gruvbox-Dark.colors".source = ./plasma/colors/Gruvbox-Dark.colors;
+home.file.".local/share/color-schemes/Tokyo-Night.colors".source = ./plasma/colors/Tokyo-Night.colors;
+
+# Switch colorscheme via Home Manager activation script
+home.activation.extraCommands = ''
+  ${pkgs.plasma6.packages.plasma-apply-colorscheme}/bin/plasma-apply-colorscheme "Catppuccin-Mocha"
+  ${pkgs.plasma6.packages.kvantummanager}/bin/kvantummanager --set "Catppuccin-Mocha"
+'';
+</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>6.3 Kvantum Themes</h3>
+                        <pre><code class="language-nix"># In modules/theming.nix
+{ config, pkgs, ... }:
+
+let
+  kvantum-themes = pkgs.kvantum.override {
+    themes = with pkgs; [
+      kvantum-theme-nordic
+      kvantum-theme-catppuccin
+      kvantum-theme-gruvbox
+      kvantum-theme-tokyonight
+    ];
+  };
+in {
+  environment.systemPackages = [ kvantum-themes ];
+}
+</code></pre>
+                    </div>
+                </section>
+
+                <section id="advanced" class="guide-section">
+                    <h2>7. Advanced Ricing on NixOS</h2>
+
+                    <div class="step">
+                        <h3>7.1 KWin Tiling (Declarative)</h3>
+                        <pre><code class="language-nix"># modules/kde.nix additions
+{ config, pkgs, ... }:
+
+{
+  # Krohnkite (i3-like tiling)
+  services.xserver.desktopManager.plasma6.kwinScripts = {
+    krohnkite.enable = true;
+    krohnkite.settings = {
+      tileNewWindows = true;
+      smartGaps = true;
+      gapSize = 8;
+    };
+  };
+
+  # Or Bismuth
+  # bismuth.enable = true;
+}</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>7.2 Window Rules (Declarative)</h3>
+                        <pre><code class="language-nix"># In home.nix
+home.file.".config/kwinrulesrc".text = ''
+  [Rule-1]
+  Description=Terminal on Desktop 2
+  wmclass=konsole
+  wmclassmatch=1
+  desktop=1
+  desktoprule=2
+
+  [Rule-2]
+  Description=Browser on Desktop 1
+  wmclass=firefox
+  wmclassmatch=1
+  desktop=0
+  desktoprule=2
+
+  [Rule-3]
+  Description=Code Editor on Desktop 3
+  wmclass=code
+  wmclassmatch=1
+  desktop=2
+  desktoprule=2
+'';
+</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>7.3 Custom Keybindings (Declarative)</h3>
+                        <pre><code class="language-nix"># In home.nix
+home.file.".config/kglobalshortcutsrc".text = ''
+  [org.kde.krunner]
+  _launch=_k_friendly_name=KRunner,Launch,krunner,Alt+Space
+
+  [org.kde.konsole]
+  _launch=_k_friendly_name=Konsole,Launch Terminal,konsole,Meta+Return
+
+  [org.kde.plasma.windowmanagement]
+  Close=_k_friendly_name=Close Window,Close Window,Meta+Shift+Q
+  Maximize=_k_friendly_name=Maximize,Maximize,Meta+M
+  Minimize=_k_friendly_name=Minimize,Minimize,Meta+N
+'';
+</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>7.4 SDDM Theme</h3>
+                        <pre><code class="language-nix"># modules/sddm.nix
+{ config, pkgs, ... }:
+
+{
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    theme = pkgs.sddm-themes.sequoia;  # or other theme
+    # Custom theme
+    # theme = pkgs.stdenv.mkDerivation {
+    #   name = "my-sddm-theme";
+    #   src = ./sddm-theme;
+    #   dontBuild = true;
+    #   installPhase = ''
+    #     mkdir -p $out/share/sddm/themes/my-theme
+    #     cp -r * $out/share/sddm/themes/my-theme/
+    #   '';
+    # };
+  };
+}
+</code></pre>
+                    </div>
+                </section>
+
+                <section id="maintenance" class="guide-section">
+                    <h2>8. System Maintenance</h2>
+
+                    <div class="step">
+                        <h3>8.1 Updating</h3>
+                        <pre><code class="language-bash"># Update flake inputs
+cd ~/nixos-config
+nix flake update
+
+# Rebuild system
+sudo nixos-rebuild switch --flake .#desktop
+
+# Or with Home Manager
+home-manager switch --flake .#youruser@desktop</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>8.2 Generations & Rollback</h3>
+                        <pre><code class="language-bash"># List generations
+sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+
+# Rollback to previous generation
+sudo nixos-rebuild switch --rollback
+
+# Or boot into previous generation from systemd-boot menu</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>8.3 Garbage Collection</h3>
+                        <pre><code class="language-bash"># Remove old generations (keep last 30 days)
+sudo nix-collect-garbage --delete-older-than 30d
+
+# Optimize store
+nix store optimise</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>8.4 Backup Strategy</h3>
+                        <pre><code class="language-bash"># Your entire config is in git!
+cd ~/nixos-config
+git add .
+git commit -m "Update rice: new theme, keybindings"
+git push
+
+# To restore on new machine:
+git clone https://github.com/you/nixos-config
+cd nixos-config
+sudo nixos-rebuild switch --flake .#desktop</code></pre>
+                    </div>
+                </section>
+
+                <nav class="guide-navigation">
+                    <a href="../html/arch-guide.html" class="btn btn-outline">← Arch Guide</a>
+                    <a href="../html/tools.html" class="btn btn-primary">Next: Tools & Resources →</a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <span class="logo-text">KDE Rice</span>
+                    </a>
+                    <p>Your comprehensive guide to ricing KDE Plasma on Arch Linux and NixOS</p>
+                </div>
+                <nav class="footer-nav">
+                    <div class="footer-section">
+                        <h4>Guides</h4>
+                        <ul>
+                            <li><a href="arch-guide.html">Arch Linux Guide</a></li>
+                            <li><a href="nixos-guide.html">NixOS Guide</a></li>
+                            <li><a href="tools.html">Tools & Resources</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="https://reddit.com/r/kde" target="_blank">r/kde</a></li>
+                            <li><a href="https://reddit.com/r/unixporn" target="_blank">r/unixporn</a></li>
+                            <li><a href="https://matrix.to/#/#kde:matrix.org" target="_blank">Matrix Chat</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://store.kde.org/" target="_blank">KDE Store</a></li>
+                            <li><a href="https://wiki.archlinux.org/" target="_blank">Arch Wiki</a></li>
+                            <li><a href="https://nixos.wiki/" target="_blank">NixOS Wiki</a></li>
+                            <li><a href="https://github.com/" target="_blank">GitHub Dotfiles</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KDE Rice Guide. Built with <span class="heart">♥</span> for the ricing community.</p>
+                <p class="footer-note">Not affiliated with KDE e.V., Arch Linux, or NixOS Foundation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/guide.js"></script>
+</body>
+</html>

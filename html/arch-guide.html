@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete guide to installing and ricing KDE Plasma on Arch Linux">
+    <title>Arch Linux KDE Plasma Ricing Guide</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/guide.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </div>
+
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="../index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span class="logo-text">KDE Rice</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="arch-guide.html" class="active">Arch Linux</a></li>
+                <li><a href="nixos-guide.html">NixOS</a></li>
+                <li><a href="tools.html">Tools & Resources</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="troubleshooting.html">Troubleshooting</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="guide-main">
+        <nav class="guide-sidebar" id="guideSidebar">
+            <div class="sidebar-header">
+                <h3>Arch Linux Guide</h3>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="#installation" class="sidebar-link">1. Installation</a></li>
+                <li><a href="#post-install" class="sidebar-link">2. Post-Install Setup</a></li>
+                <li><a href="#kde-install" class="sidebar-link">3. KDE Plasma Install</a></li>
+                <li><a href="#drivers" class="sidebar-link">4. Graphics Drivers</a></li>
+                <li><a href="#audio" class="sidebar-link">5. Audio (PipeWire)</a></li>
+                <li><a href="#theming" class="sidebar-link">6. Theming Basics</a></li>
+                <li><a href="#advanced" class="sidebar-link">7. Advanced Ricing</a></li>
+                <li><a href="#dotfiles" class="sidebar-link">8. Dotfile Management</a></li>
+            </ul>
+        </nav>
+
+        <div class="guide-content">
+            <article class="guide-article">
+                <header class="guide-header">
+                    <div class="guide-breadcrumbs">
+                        <a href="../index.html">Home</a>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        <a href="arch-guide.html">Arch Linux</a>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        <span>Installation</span>
+                    </div>
+                    <h1>Arch Linux KDE Plasma Ricing Guide</h1>
+                    <p class="guide-description">Complete walkthrough from base install to a fully riced KDE Plasma desktop on Arch Linux</p>
+                    <div class="guide-meta">
+                        <span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> ~45 min read</span>
+                        <span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Intermediate</span>
+                        <span class="meta-item badge badge-arch">Arch Linux</span>
+                    </div>
+                </header>
+
+                <section id="installation" class="guide-section">
+                    <h2>1. Base System Installation</h2>
+                    <p>Start with the official Arch Linux installation medium. Boot into the live environment and follow these steps:</p>
+
+                    <div class="step">
+                        <h3>1.1 Verify Boot Mode</h3>
+                        <pre><code class="language-bash"># Check if booted in UEFI mode
+ls /sys/firmware/efi/efivars</code></pre>
+                        <p>If the directory exists, you're in UEFI mode. Otherwise, you're in BIOS mode.</p>
+                    </div>
+
+                    <div class="step">
+                        <h3>1.2 Connect to Internet</h3>
+                        <pre><code class="language-bash"># For WiFi
+iwctl
+# Inside iwctl:
+station wlan0 connect "SSID"
+
+# For Ethernet (usually auto)
+ping archlinux.org</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>1.3 Partition Disks</h3>
+                        <pre><code class="language-bash"># List disks
+lsblk
+
+# Partition with fdisk (UEFI example)
+fdisk /dev/nvme0n1
+# Create: EFI (512M, type EFI), Root (rest, type Linux filesystem)</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>1.4 Format & Mount</h3>
+                        <pre><code class="language-bash"># Format partitions
+mkfs.fat -F32 /dev/nvme0n1p1  # EFI
+mkfs.ext4 /dev/nvme0n1p2      # Root
+
+# Mount
+mount /dev/nvme0n1p2 /mnt
+mkdir -p /mnt/boot/efi
+mount /dev/nvme0n1p1 /mnt/boot/efi</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>1.5 Install Base System</h3>
+                        <pre><code class="language-bash"># Install base packages + essentials
+pacstrap -K /mnt base linux linux-firmware \
+    base-devel networkmanager sudo vim git \
+    intel-ucode  # or amd-ucode
+
+# Generate fstab
+genfstab -U /mnt >> /mnt/etc/fstab</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>1.6 Chroot & Configure</h3>
+                        <pre><code class="language-bash">arch-chroot /mnt
+
+# Timezone
+ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+hwclock --systohc
+
+# Localization
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+# Hostname
+echo "archrice" > /etc/hostname
+
+# Root password
+passwd
+
+# Create user
+useradd -m -G wheel -s /bin/bash youruser
+passwd youruser
+EDITOR=vim visudo  # Uncomment %wheel ALL=(ALL:ALL) ALL</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>1.7 Bootloader (systemd-boot for UEFI)</h3>
+                        <pre><code class="language-bash">bootctl install
+
+# Create loader entry
+cat > /boot/loader/entries/arch.conf << 'EOF'
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /intel-ucode.img
+initrd  /initramfs-linux.img
+options root=PARTUUID=$(blkid -s PARTUUID -o value /dev/nvme0n1p2) rw
+EOF
+
+# Configure loader
+cat > /boot/loader/loader.conf << 'EOF'
+default arch
+timeout 3
+console-mode keep
+EOF</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>1.8 Enable Services & Reboot</h3>
+                        <pre><code class="language-bash">systemctl enable NetworkManager
+exit
+umount -R /mnt
+reboot</code></pre>
+                    </div>
+                </section>
+
+                <section id="post-install" class="guide-section">
+                    <h2>2. Post-Installation Setup</h2>
+
+                    <div class="step">
+                        <h3>2.1 System Update & Essential Packages</h3>
+                        <pre><code class="language-bash">sudo pacman -Syu
+
+# Essential utilities
+sudo pacman -S --needed \
+    base-devel git curl wget unzip zip \
+    htop btop neofetch fastfetch \
+    man-db man-pages texinfo \
+    reflector rsync openssh</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>2.2 Configure Pacman & Mirrors</h3>
+                        <pre><code class="language-bash"># Enable parallel downloads & color
+sudo sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/pacman.conf
+sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
+sudo sed -i 's/^#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
+
+# Add ILoveCandy for fun
+sudo sed -i '/^Color/a ILoveCandy' /etc/pacman.conf
+
+# Update mirrors
+sudo reflector --country "United States" --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>2.3 AUR Helper (yay)</h3>
+                        <pre><code class="language-bash">cd /tmp
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si --noconfirm
+cd ~ && rm -rf /tmp/yay</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>2.4 Enable Multilib (for Steam, Wine, etc.)</h3>
+                        <pre><code class="language-bash">sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
+sudo pacman -Syu</code></pre>
+                    </div>
+                </section>
+
+                <section id="kde-install" class="guide-section">
+                    <h2>3. KDE Plasma Installation</h2>
+
+                    <div class="step">
+                        <h3>3.1 Minimal vs Full Plasma</h3>
+                        <div class="option-cards">
+                            <div class="option-card">
+                                <h4>Minimal (Recommended for Ricing)</h4>
+                                <pre><code class="language-bash">sudo pacman -S plasma-meta konsole dolphin \
+    firefox systemsettings kde-gtk-config \
+    sddm plasma-wayland-session</code></pre>
+                                <p>~400MB, choose your own apps</p>
+                            </div>
+                            <div class="option-card">
+                                <h4>Full Plasma (kde-apps)</h4>
+                                <pre><code class="language-bash">sudo pacman -S plasma kde-applications \
+    sddm plasma-wayland-session</code></pre>
+                                <p>~2GB, includes all KDE apps</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>3.2 Enable SDDM & Services</h3>
+                        <pre><code class="language-bash">sudo systemctl enable sddm
+sudo systemctl enable NetworkManager
+sudo systemctl enable bluetooth  # if needed
+
+# For Wayland session (recommended)
+# Ensure your user is in video group
+sudo usermod -aG video $USER</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>3.3 Essential Plasma Packages for Ricing</h3>
+                        <pre><code class="language-bash"># Core ricing tools
+sudo pacman -S --needed \
+    kvantum-qt5 kvantum-qt6 \
+    kde-gtk-config \
+    qt5ct qt6ct \
+    plasma-browser-integration \
+    xdg-desktop-portal-kde \
+    kdeconnect
+
+# AUR packages for advanced ricing
+yay -S --needed \
+    latte-dock-git \
+    krohnkite-git \
+    bismuth-git \
+    plasma5-theme-nordic \
+    plasma6-theme-catppuccin-git \
+    whitesur-kde-theme-git \
+    tokyo-night-kde-theme-git \
+    gruvbox-kde-theme-git</code></pre>
+                    </div>
+                </section>
+
+                <section id="drivers" class="guide-section">
+                    <h2>4. Graphics Drivers</h2>
+
+                    <div class="driver-tabs">
+                        <button class="driver-tab active" data-driver="intel">Intel</button>
+                        <button class="driver-tab" data-driver="amd">AMD</button>
+                        <button class="driver-tab" data-driver="nvidia">NVIDIA</button>
+                        <button class="driver-tab" data-driver="hybrid">Hybrid</button>
+                    </div>
+
+                    <div class="driver-content">
+                        <div class="driver-panel active" data-driver="intel">
+                            <pre><code class="language-bash">sudo pacman -S mesa libva-mesa-driver \
+    mesa-vdpau vulkan-intel
+# For older Intel
+# sudo pacman -S intel-media-driver</code></pre>
+                        </div>
+                        <div class="driver-panel" data-driver="amd">
+                            <pre><code class="language-bash">sudo pacman -S mesa libva-mesa-driver \
+    mesa-vdpau vulkan-radeon \
+    lib32-mesa lib32-vulkan-radeon \
+    lib32-libva-mesa-driver</code></pre>
+                        </div>
+                        <div class="driver-panel" data-driver="nvidia">
+                            <pre><code class="language-bash"># Proprietary (recommended for gaming/CUDA)
+sudo pacman -S nvidia nvidia-utils \
+    lib32-nvidia-utils nvidia-settings \
+    vulkan-icd-loader lib32-vulkan-icd-loader
+
+# Or open-source (nouveau - limited features)
+# sudo pacman -S xf86-video-nouveau mesa
+
+# Add kernel modules for mkinitcpio
+sudo sed -i 's/MODULES=()/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' /etc/mkinitcpio.conf
+sudo mkinitcpio -P
+
+# Enable DRM KMS
+echo "options nvidia_drm modeset=1 fbdev=1" | sudo tee /etc/modprobe.d/nvidia.conf</code></pre>
+                        </div>
+                        <div class="driver-panel" data-driver="hybrid">
+                            <pre><code class="language-bash"># For Optimus laptops (Intel + NVIDIA)
+sudo pacman -S nvidia-prime optimus-manager
+
+# Or use envycontrol (AUR)
+yay -S envycontrol
+
+# Switch GPU:
+# envycontrol -s integrated    # Intel only
+# envycontrol -s hybrid        # Dynamic switching
+# envycontrol -s nvidia        # NVIDIA only</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="audio" class="guide-section">
+                    <h2>5. Audio Setup (PipeWire)</h2>
+                    <pre><code class="language-bash">sudo pacman -S pipewire pipewire-pulse \
+    pipewire-alsa pipewire-jack \
+    wireplumber libwireplumber \
+    pavucontrol helvum  # GUI mixers
+
+# Enable user services
+systemctl --user enable pipewire pipewire-pulse wireplumber</code></pre>
+                </section>
+
+                <section id="theming" class="guide-section">
+                    <h2>6. Theming Basics</h2>
+
+                    <div class="step">
+                        <h3>6.1 Global Themes</h3>
+                        <p>Install themes via KDE Store (Get New Global Themes) or manually:</p>
+                        <pre><code class="language-bash"># Manual theme installation
+mkdir -p ~/.local/share/plasma/look-and-feel
+# Extract theme there
+
+# Or use plasmastyle (AUR) for CLI theming
+yay -S plasmastyle
+plasmastyle apply Nordic</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>6.2 Color Schemes</h3>
+                        <pre><code class="language-bash"># Popular color schemes (install via KDE Store or AUR)
+# Nordic, Catppuccin, Gruvbox, Tokyo Night, Dracula, Rose Pine
+
+# Apply via CLI
+plasma-apply-colorscheme Nordic
+# Or for specific scheme file
+plasma-apply-colorscheme ~/.local/share/color-schemes/Catppuccin-Mocha.colors</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>6.3 Application Style & Fonts</h3>
+                        <pre><code class="language-bash"># Fonts
+sudo pacman -S noto-fonts noto-fonts-emoji \
+    ttf-jetbrains-mono ttf-firacode-nerd \
+    ttf-cascadia-code-nerd
+
+# Qt theme config (for GTK apps)
+kwriteconfig6 --file kdeglobals --group General --key Font "Noto Sans,10,-1,5,50,0,0,0,0,0"
+kwriteconfig6 --file kdeglobals --group General --key Fixed "JetBrains Mono,10,-1,5,50,0,0,0,0,0"
+kwriteconfig6 --file kdeglobals --group General --key MenuFont "Noto Sans,10,-1,5,50,0,0,0,0,0"
+
+# Force Qt apps to use KDE style
+echo "export QT_QPA_PLATFORMTHEME=kde" >> ~/.config/environment.d/envvars.conf</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>6.4 Kvantum (Qt Theming Engine)</h3>
+                        <pre><code class="language-bash"># Install Kvantum themes
+yay -S kvantum-theme-nordic kvantum-theme-catppuccin-git \
+    kvantum-theme-gruvbox-git kvantum-theme-tokyonight-git
+
+# Apply theme
+kvantummanager --set Nordic
+# Or GUI: kvantummanager</code></pre>
+                    </div>
+                </section>
+
+                <section id="advanced" class="guide-section">
+                    <h2>7. Advanced Ricing</h2>
+
+                    <div class="step">
+                        <h3>7.1 Latte Dock (Modern Panel/Dock)</h3>
+                        <pre><code class="language-bash">yay -S latte-dock-git
+
+# Configure: Right-click panel → Layouts → Configure
+# Import layouts from ~/.local/share/latte/layouts/</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>7.2 KWin Tiling Scripts</h3>
+                        <div class="option-cards">
+                            <div class="option-card">
+                                <h4>Krohnkite (i3-like)</h4>
+                                <pre><code class="language-bash">yay -S krohnkite-git
+# Enable in System Settings → Window Management → KWin Scripts</code></pre>
+                            </div>
+                            <div class="option-card">
+                                <h4>Bismuth (Auto-tiling)</h4>
+                                <pre><code class="language-bash">yay -S bismuth-git
+# Enable in KWin Scripts</code></pre>
+                            </div>
+                            <div class="option-card">
+                                <h4>Polonium (Keyboard-driven)</h4>
+                                <pre><code class="language-bash">yay -S kwin-script-polonium-git</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h3>7.3 Window Rules</h3>
+                        <p>System Settings → Window Management → Window Rules</p>
+                        <pre><code class="language-bash"># Example: Force terminal to specific desktop
+# Window class: konsole → Virtual Desktop: 2 → Apply initially
+
+# Example: Borderless maximized windows
+kwriteconfig6 --file kwinrc --group Windows --key BorderlessMaximizedWindows true
+kwriteconfig6 --file kwinrc --group Windows --key ElectricBorderMaximize true
+kwriteconfig6 --file kwinrc --group Windows --key ElectricBorderCornerRatio 0.25</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>7.4 Custom Keybindings</h3>
+                        <pre><code class="language-bash"># System Settings → Shortcuts → Custom Shortcuts
+# Example: Meta+Enter → Konsole
+# Example: Meta+Shift+Q → Close window
+# Example: Meta+D → Application launcher (KRunner)</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>7.5 Essential Widgets</h3>
+                        <pre><code class="language-bash"># From KDE Store (Get New Widgets):
+# - System Monitor (CPU, RAM, Network, Disk)
+# - Weather Widget
+# - Global Menu
+# - Thermal Monitor
+# - Clipboard History
+# - Virtual Desktop Bar
+# - Better Inline Clock</code></pre>
+                    </div>
+                </section>
+
+                <section id="dotfiles" class="guide-section">
+                    <h2>8. Dotfile Management & Backup</h2>
+
+                    <div class="step">
+                        <h3>8.1 Bare Git Repository (Recommended)</h3>
+                        <pre><code class="language-bash"># Initialize bare repo
+git init --bare $HOME/.dotfiles
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+dotfiles config --local status.showUntrackedFiles no
+
+# Add configs
+dotfiles add .config/kdeglobals .config/kwinrc .config/plasma-org.kde.plasma.desktop-appletsrc ...
+dotfiles commit -m "Initial KDE config"
+dotfiles remote add origin git@github.com:user/dotfiles.git
+dotfiles push -u origin main</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>8.2 Stow (Symlink Manager)</h3>
+                        <pre><code class="language-bash">sudo pacman -S stow
+
+# Structure: ~/dotfiles/.config/kdeglobals → ~/.config/kdeglobals
+cd ~/dotfiles
+stow .config .local</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>8.3 Home Manager (Nix-style on Arch)</h3>
+                        <pre><code class="language-bash"># Install via Nix (multi-user)
+sh <(curl -L https://nixos.org/nix/install) --daemon
+
+# Then use Home Manager for declarative config
+# See NixOS guide for Home Manager details</code></pre>
+                    </div>
+
+                    <div class="step">
+                        <h3>8.4 Backup Critical Configs</h3>
+                        <pre><code class="language-bash">#!/bin/bash
+# backup-kde.sh
+BACKUP_DIR="$HOME/backups/kde-$(date +%Y%m%d)"
+mkdir -p "$BACKUP_DIR"
+
+cp -r ~/.config/kde* "$BACKUP_DIR/"
+cp -r ~/.config/plasma* "$BACKUP_DIR/"
+cp -r ~/.config/kwin* "$BACKUP_DIR/"
+cp -r ~/.local/share/plasma "$BACKUP_DIR/"
+cp -r ~/.local/share/color-schemes "$BACKUP_DIR/"
+cp -r ~/.local/share/kwin "$BACKUP_DIR/"
+
+echo "Backed up to $BACKUP_DIR"</code></pre>
+                    </div>
+                </section>
+
+                <nav class="guide-navigation">
+                    <a href="../html/nixos-guide.html" class="btn btn-primary">Next: NixOS Guide →</a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <span class="logo-text">KDE Rice</span>
+                    </a>
+                    <p>Your comprehensive guide to ricing KDE Plasma on Arch Linux and NixOS</p>
+                </div>
+                <nav class="footer-nav">
+                    <div class="footer-section">
+                        <h4>Guides</h4>
+                        <ul>
+                            <li><a href="arch-guide.html">Arch Linux Guide</a></li>
+                            <li><a href="nixos-guide.html">NixOS Guide</a></li>
+                            <li><a href="tools.html">Tools & Resources</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="https://reddit.com/r/kde" target="_blank">r/kde</a></li>
+                            <li><a href="https://reddit.com/r/unixporn" target="_blank">r/unixporn</a></li>
+                            <li><a href="https://matrix.to/#/#kde:matrix.org" target="_blank">Matrix Chat</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://store.kde.org/" target="_blank">KDE Store</a></li>
+                            <li><a href="https://wiki.archlinux.org/" target="_blank">Arch Wiki</a></li>
+                            <li><a href="https://nixos.wiki/" target="_blank">NixOS Wiki</a></li>
+                            <li><a href="https://github.com/" target="_blank">GitHub Dotfiles</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KDE Rice Guide. Built with <span class="heart">♥</span> for the ricing community.</p>
+                <p class="footer-note">Not affiliated with KDE e.V., Arch Linux, or NixOS Foundation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/guide.js"></script>
+</body>
+</html>

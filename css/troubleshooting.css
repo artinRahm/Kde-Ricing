@@ -1,0 +1,248 @@
+/* ========================================
+   KDE Plasma Ricing Guide - Troubleshooting Page Styles
+   ======================================== */
+
+.troubleshooting-main {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-xl);
+  padding: var(--space-xl) 0 var(--space-3xl);
+}
+
+/* Trouble Sidebar */
+.trouble-sidebar {
+  position: sticky;
+  top: 100px;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-md);
+}
+
+.trouble-sidebar .sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.trouble-sidebar .sidebar-toggle {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+}
+
+.trouble-sidebar .sidebar-nav {
+  list-style: none;
+}
+
+.trouble-sidebar .sidebar-link {
+  display: block;
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+}
+
+.trouble-sidebar .sidebar-link:hover,
+.trouble-sidebar .sidebar-link.active {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  border-left-color: var(--color-primary);
+}
+
+/* Trouble Content */
+.trouble-content {
+  min-width: 0;
+}
+
+.trouble-section {
+  margin-bottom: var(--space-3xl);
+}
+
+.trouble-section h2 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-primary);
+  display: inline-block;
+}
+
+.trouble-section h3 {
+  font-size: var(--text-xl);
+  margin: var(--space-xl) 0 var(--space-md);
+  color: var(--color-text);
+}
+
+.trouble-section p {
+  margin-bottom: var(--space-md);
+}
+
+.trouble-section ul,
+.trouble-section ol {
+  margin: var(--space-md) 0;
+  padding-left: var(--space-xl);
+}
+
+.trouble-section li {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-secondary);
+}
+
+.trouble-section li::marker {
+  color: var(--color-primary);
+}
+
+/* Trouble Item */
+.trouble-item {
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.trouble-item h3 {
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+  font-size: var(--text-lg);
+  color: var(--color-primary);
+}
+
+.trouble-solution h4 {
+  font-size: var(--text-base);
+  color: var(--color-secondary);
+  margin: var(--space-lg) 0 var(--space-sm);
+}
+
+.trouble-solution h4:first-child {
+  margin-top: 0;
+}
+
+.trouble-solution pre {
+  margin: var(--space-md) 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.trouble-solution code {
+  font-size: var(--text-xs);
+  line-height: 1.6;
+}
+
+/* Help Resources */
+.help-resources {
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.help-card {
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+}
+
+.help-card h3 {
+  font-size: var(--text-lg);
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.help-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.help-card li {
+  margin-bottom: var(--space-sm);
+}
+
+.help-card a {
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.help-card a:hover {
+  color: var(--color-primary);
+}
+
+.help-card pre {
+  margin: var(--space-md) 0;
+}
+
+.help-card code {
+  font-size: var(--text-xs);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .troubleshooting-main {
+    grid-template-columns: 1fr;
+  }
+
+  .trouble-sidebar {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: auto;
+    max-height: calc(100vh - 64px);
+    z-index: var(--z-fixed);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .trouble-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .trouble-sidebar .sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .trouble-sidebar .sidebar-header {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-bg-elevated);
+    z-index: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .troubleshooting-main {
+    padding: var(--space-md) 0 var(--space-xl);
+  }
+
+  .trouble-section h2 {
+    font-size: var(--text-xl);
+  }
+
+  .trouble-item {
+    padding: var(--space-md);
+  }
+
+  .help-resources {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete guide to ricing KDE Plasma on Arch Linux and NixOS">
+    <title>KDE Plasma Ricing Guide - Arch & NixOS</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </div>
+
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span class="logo-text">KDE Rice</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="html/arch-guide.html">Arch Linux</a></li>
+                <li><a href="html/nixos-guide.html">NixOS</a></li>
+                <li><a href="html/tools.html">Tools & Resources</a></li>
+                <li><a href="html/gallery.html">Gallery</a></li>
+                <li><a href="html/troubleshooting.html">Troubleshooting</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Master the Art of</span>
+                    <span class="title-line highlight">KDE Plasma Ricing</span>
+                </h1>
+                <p class="hero-subtitle">Transform your desktop into a personalized, efficient, and beautiful workspace on Arch Linux and NixOS</p>
+                <div class="hero-badges">
+                    <span class="badge badge-arch">Arch Linux</span>
+                    <span class="badge badge-nixos">NixOS</span>
+                    <span class="badge badge-kde">KDE Plasma 6</span>
+                </div>
+                <div class="hero-cta">
+                    <a href="html/arch-guide.html" class="btn btn-primary">Start with Arch</a>
+                    <a href="html/nixos-guide.html" class="btn btn-secondary">Start with NixOS</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="desktop-preview" id="desktopPreview">
+                    <div class="window-preview">
+                        <div class="window-header">
+                            <div class="window-controls">
+                                <span class="control close"></span>
+                                <span class="control minimize"></span>
+                                <span class="control maximize"></span>
+                            </div>
+                            <div class="window-title">~/.config/kde</div>
+                        </div>
+                        <div class="window-content">
+                            <div class="code-lines">
+                                <span class="line"><span class="prompt">$</span> <span class="cmd">kwriteconfig6</span> <span class="arg">--file</span> <span class="arg">kdeglobals</span> <span class="arg">--group</span> <span class="arg">Colors</span> <span class="arg">--key</span> <span class="arg">ColorScheme</span> <span class="arg">Breeze</span></span>
+                                <span class="line"><span class="prompt">$</span> <span class="cmd">plasma-apply-colorscheme</span> <span class="arg">Nordic</span></span>
+                                <span class="line"><span class="prompt">$</span> <span class="cmd">kwriteconfig6</span> <span class="arg">--file</span> <span class="arg">kwinrc</span> <span class="arg">--group</span> <span class="arg">Windows</span> <span class="arg">--key</span> <span class="arg">BorderlessMaximizedWindows</span> <span class="arg">true</span></span>
+                                <span class="line"><span class="prompt">$</span> <span class="cmd">qdbus</span> <span class="arg">org.kde.plasmashell</span> <span class="arg">/PlasmaShell</span> <span class="arg">evaluateScript</span> <span class="arg">'var panel = panelById(1); panel.location = "bottom";'</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-elements">
+                        <div class="float-item" style="--delay: 0s"><img src="images/plasma-logo.svg" alt="KDE Plasma" class="float-img"></div>
+                        <div class="float-item" style="--delay: 1s"><img src="images/arch-logo.svg" alt="Arch Linux" class="float-img"></div>
+                        <div class="float-item" style="--delay: 2s"><img src="images/nixos-logo.svg" alt="NixOS" class="float-img"></div>
+                        <div class="float-item" style="--delay: 3s"><img src="images/rice-bowl.svg" alt="Ricing" class="float-img"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">What You'll Learn</h2>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                        </div>
+                        <h3>Installation & Setup</h3>
+                        <p>Step-by-step installation of KDE Plasma on both Arch Linux and NixOS with optimal configurations</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                        </div>
+                        <h3>Theming & Colors</h3>
+                        <p>Global themes, color schemes, application styling, and creating cohesive visual identities</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                        </div>
+                        <h3>Window Management</h3>
+                        <p>KWin scripts, tiling, window rules, virtual desktops, and keyboard-driven workflows</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                        </div>
+                        <h3>Panels & Widgets</h3>
+                        <p>Custom panels, latte dock, system monitoring, application launchers, and productivity widgets</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="23 4 23 10 17 10"></polyline>
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                            </svg>
+                        </div>
+                        <h3>Automation</h3>
+                        <p>KDE Connect, DBus scripting, systemd services, and declarative configuration management</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h3>Backup & Sync</h3>
+                        <p>Dotfile management, home-manager, configuration versioning, and disaster recovery</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="comparison">
+            <div class="container">
+                <h2 class="section-title">Arch Linux vs NixOS for Ricing</h2>
+                <div class="comparison-grid">
+                    <div class="comparison-card arch-card">
+                        <div class="card-header">
+                            <svg class="distro-icon" viewBox="0 0 120 120">
+                                <path d="M60 10 L110 35 L110 85 L60 110 L10 85 L10 35 Z" fill="#1793D1"/>
+                                <path d="M60 10 L60 110" stroke="#0F6B9E" stroke-width="4"/>
+                                <path d="M10 35 L110 35" stroke="#0F6B9E" stroke-width="4"/>
+                                <path d="M10 85 L110 85" stroke="#0F6B9E" stroke-width="4"/>
+                            </svg>
+                            <h3>Arch Linux</h3>
+                        </div>
+                        <ul class="comparison-list">
+                            <li><strong>Rolling Release:</strong> Always latest KDE Plasma versions</li>
+                            <li><strong>AUR Access:</strong> Vast repository of themes, widgets, and tools</li>
+                            <li><strong>Manual Control:</strong> Fine-grained package selection</li>
+                            <li><strong>Minimal Base:</strong> Build exactly what you need</li>
+                            <li><strong>Wiki:</strong> Best documentation in Linux world</li>
+                            <li><strong>Learning Curve:</strong> Steeper but rewarding</li>
+                        </ul>
+                        <a href="html/arch-guide.html" class="btn btn-outline">View Arch Guide</a>
+                    </div>
+                    <div class="comparison-card nixos-card">
+                        <div class="card-header">
+                            <svg class="distro-icon" viewBox="0 0 120 120">
+                                <rect x="15" y="15" width="90" height="90" rx="15" fill="#5277C3"/>
+                                <path d="M60 30 L60 90 M30 60 L90 60" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                            </svg>
+                            <h3>NixOS</h3>
+                        </div>
+                        <ul class="comparison-list">
+                            <li><strong>Declarative Config:</strong> Entire system in configuration.nix</li>
+                            <li><strong>Reproducible:</strong> Same config = same system</li>
+                            <li><strong>Rollback:</strong> Instant generation switching</li>
+                            <li><strong>Home Manager:</strong> User-level declarative config</li>
+                            <li><strong>Flakes:</strong> Modern, composable configurations</li>
+                            <li><strong>Learning Curve:</strong> Different paradigm, powerful</li>
+                        </ul>
+                        <a href="html/nixos-guide.html" class="btn btn-outline">View NixOS Guide</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-start">
+            <div class="container">
+                <h2 class="section-title">Quick Start Checklist</h2>
+                <div class="checklist-grid">
+                    <div class="checklist-column">
+                        <h3><span class="check-num">01</span> Base System</h3>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="base1"><label for="base1">Install base system (Arch ISO / NixOS ISO)</label></li>
+                            <li><input type="checkbox" id="base2"><label for="base2">Configure bootloader (systemd-boot / GRUB)</label></li>
+                            <li><input type="checkbox" id="base3"><label for="base3">Set up networking (NetworkManager / systemd-networkd)</label></li>
+                            <li><input type="checkbox" id="base4"><label for="base4">Create user with sudo/wheel privileges</label></li>
+                        </ul>
+                    </div>
+                    <div class="checklist-column">
+                        <h3><span class="check-num">02</span> KDE Plasma</h3>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="kde1"><label for="kde1">Install plasma-meta / plasma packages</label></li>
+                            <li><input type="checkbox" id="kde2"><label for="kde2">Enable SDDM display manager</label></li>
+                            <li><input type="checkbox" id="kde3"><label for="kde3">Install graphics drivers (mesa / nvidia)</label></li>
+                            <li><input type="checkbox" id="kde4"><label for="kde4">Configure PipeWire for audio</label></li>
+                        </ul>
+                    </div>
+                    <div class="checklist-column">
+                        <h3><span class="check-num">03</span> Ricing Essentials</h3>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="rice1"><label for="rice1">Choose global theme (Breeze, Nordic, Catppuccin, etc.)</label></li>
+                            <li><input type="checkbox" id="rice2"><label for="rice2">Set up color scheme & application style</label></li>
+                            <li><input type="checkbox" id="rice3"><label for="rice3">Configure fonts (Noto, JetBrains Mono, etc.)</label></li>
+                            <li><input type="checkbox" id="rice4"><label for="rice4">Install essential widgets & KWin scripts</label></li>
+                        </ul>
+                    </div>
+                    <div class="checklist-column">
+                        <h3><span class="check-num">04</span> Advanced</h3>
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="adv1"><label for="adv1">Set up Latte Dock or custom panels</label></li>
+                            <li><input type="checkbox" id="adv2"><label for="adv2">Configure KWin tiling (Krohnkite, Bismuth)</label></li>
+                            <li><input type="checkbox" id="adv3"><label for="adv3">Create window rules for specific apps</label></li>
+                            <li><input type="checkbox" id="adv4"><label for="adv4">Backup config with dotfiles/git/home-manager</label></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="showcase">
+            <div class="container">
+                <h2 class="section-title">Community Rice Showcase</h2>
+                <div class="showcase-grid" id="showcaseGrid">
+                    <article class="showcase-item" data-tags="arch,nordic,minimal">
+                        <div class="showcase-img">
+                            <img src="images/showcase-1.svg" alt="Nordic minimal rice on Arch" loading="lazy">
+                            <div class="showcase-overlay">
+                                <a href="html/gallery.html#rice-1" class="btn btn-sm">View Details</a>
+                            </div>
+                        </div>
+                        <div class="showcase-info">
+                            <h4>Nordic Minimal</h4>
+                            <div class="showcase-tags">
+                                <span class="tag tag-arch">Arch</span>
+                                <span class="tag tag-theme">Nordic</span>
+                                <span class="tag tag-style">Minimal</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="showcase-item" data-tags="nixos,catppuccin,tiling">
+                        <div class="showcase-img">
+                            <img src="images/showcase-2.svg" alt="Catppuccin tiling rice on NixOS" loading="lazy">
+                            <div class="showcase-overlay">
+                                <a href="html/gallery.html#rice-2" class="btn btn-sm">View Details</a>
+                            </div>
+                        </div>
+                        <div class="showcase-info">
+                            <h4>Catppuccin Tiling</h4>
+                            <div class="showcase-tags">
+                                <span class="tag tag-nixos">NixOS</span>
+                                <span class="tag tag-theme">Catppuccin</span>
+                                <span class="tag tag-style">Tiling</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="showcase-item" data-tags="arch,gruvbox,custom">
+                        <div class="showcase-img">
+                            <img src="images/showcase-3.svg" alt="Gruvbox custom rice on Arch" loading="lazy">
+                            <div class="showcase-overlay">
+                                <a href="html/gallery.html#rice-3" class="btn btn-sm">View Details</a>
+                            </div>
+                        </div>
+                        <div class="showcase-info">
+                            <h4>Gruvbox Custom</h4>
+                            <div class="showcase-tags">
+                                <span class="tag tag-arch">Arch</span>
+                                <span class="tag tag-theme">Gruvbox</span>
+                                <span class="tag tag-style">Custom</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="showcase-item" data-tags="nixos,tokyo-night,wayland">
+                        <div class="showcase-img">
+                            <img src="images/showcase-4.svg" alt="Tokyo Night Wayland rice on NixOS" loading="lazy">
+                            <div class="showcase-overlay">
+                                <a href="html/gallery.html#rice-4" class="btn btn-sm">View Details</a>
+                            </div>
+                        </div>
+                        <div class="showcase-info">
+                            <h4>Tokyo Night Wayland</h4>
+                            <div class="showcase-tags">
+                                <span class="tag tag-nixos">NixOS</span>
+                                <span class="tag tag-theme">Tokyo Night</span>
+                                <span class="tag tag-style">Wayland</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="showcase-filter">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="arch">Arch Linux</button>
+                    <button class="filter-btn" data-filter="nixos">NixOS</button>
+                    <button class="filter-btn" data-filter="minimal">Minimal</button>
+                    <button class="filter-btn" data-filter="tiling">Tiling</button>
+                </div>
+                <a href="html/gallery.html" class="btn btn-primary btn-lg">View Full Gallery</a>
+            </div>
+        </section>
+
+        <section class="resources">
+            <div class="container">
+                <h2 class="section-title">Essential Resources</h2>
+                <div class="resources-grid">
+                    <a href="https://wiki.archlinux.org/title/KDE" target="_blank" class="resource-card">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                        </div>
+                        <h4>Arch Wiki - KDE</h4>
+                        <p>Official Arch Linux documentation for KDE Plasma installation and configuration</p>
+                    </a>
+                    <a href="https://nixos.wiki/wiki/KDE" target="_blank" class="resource-card">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                        </div>
+                        <h4>NixOS Wiki - KDE</h4>
+                        <p>NixOS-specific KDE Plasma configuration with Home Manager examples</p>
+                    </a>
+                    <a href="https://store.kde.org/" target="_blank" class="resource-card">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 6v6l4 2"></path>
+                            </svg>
+                        </div>
+                        <h4>KDE Store</h4>
+                        <p>Themes, widgets, wallpapers, color schemes, and KWin scripts</p>
+                    </a>
+                    <a href="https://github.com/r/unixporn" target="_blank" class="resource-card">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                        </div>
+                        <h4>r/unixporn</h4>
+                        <p>Community showcase for desktop customization inspiration</p>
+                    </a>
+                    <a href="https://github.com/adi1090x/kde-plasma-themes" target="_blank" class="resource-card">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                        </div>
+                        <h4>Adi1090x Themes</h4>
+                        <p>Beautiful pre-made KDE Plasma themes with easy installation scripts</p>
+                    </a>
+                    <a href="https://github.com/EliverLara/Nordic" target="_blank" class="resource-card">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                        </div>
+                        <h4>Nordic KDE</h4>
+                        <p>Popular Nord-inspired theme suite for KDE Plasma</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <span class="logo-text">KDE Rice</span>
+                    </a>
+                    <p>Your comprehensive guide to ricing KDE Plasma on Arch Linux and NixOS</p>
+                </div>
+                <nav class="footer-nav">
+                    <div class="footer-section">
+                        <h4>Guides</h4>
+                        <ul>
+                            <li><a href="html/arch-guide.html">Arch Linux Guide</a></li>
+                            <li><a href="html/nixos-guide.html">NixOS Guide</a></li>
+                            <li><a href="html/tools.html">Tools & Resources</a></li>
+                            <li><a href="html/troubleshooting.html">Troubleshooting</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="html/gallery.html">Gallery</a></li>
+                            <li><a href="https://reddit.com/r/kde" target="_blank">r/kde</a></li>
+                            <li><a href="https://reddit.com/r/unixporn" target="_blank">r/unixporn</a></li>
+                            <li><a href="https://matrix.to/#/#kde:matrix.org" target="_blank">Matrix Chat</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://store.kde.org/" target="_blank">KDE Store</a></li>
+                            <li><a href="https://wiki.archlinux.org/" target="_blank">Arch Wiki</a></li>
+                            <li><a href="https://nixos.wiki/" target="_blank">NixOS Wiki</a></li>
+                            <li><a href="https://github.com/" target="_blank">GitHub Dotfiles</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KDE Rice Guide. Built with <span class="heart">♥</span> for the ricing community.</p>
+                <p class="footer-note">Not affiliated with KDE e.V., Arch Linux, or NixOS Foundation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/showcase.js"></script>
+</body>
+</html>

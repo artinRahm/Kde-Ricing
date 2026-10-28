@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#282828;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3c3836;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fabd2f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fe8019;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg3)"/>
+  <!-- Latte Dock center -->
+  <rect x="150" y="420" width="500" height="60" rx="30" fill="#3c3836" opacity="0.9"/>
+  <rect x="170" y="430" width="460" height="40" rx="20" fill="#504945"/>
+  <!-- Window -->
+  <rect x="100" y="80" width="600" height="300" rx="8" fill="#3c3836" stroke="#d3869b" stroke-width="2"/>
+  <rect x="100" y="80" width="600" height="36" rx="8" fill="#504945"/>
+  <circle cx="120" cy="98" r="6" fill="#fb4934"/>
+  <circle cx="140" cy="98" r="6" fill="#fe8019"/>
+  <circle cx="160" cy="98" r="6" fill="#b8bb26"/>
+  <!-- Vim-like content -->
+  <text x="130" y="140" font-family="monospace" font-size="14" fill="#fbf1c7">" Gruvbox Material</text>
+  <text x="130" y="170" font-family="monospace" font-size="14" fill="#d5c4a1">set background=dark</text>
+  <text x="130" y="195" font-family="monospace" font-size="14" fill="#b8bb26">colorscheme gruvbox-material</text>
+  <text x="130" y="220" font-family="monospace" font-size="14" fill="#fabd2f">set number</text>
+  <text x="130" y="245" font-family="monospace" font-size="14" fill="#8ec07c">set relativenumber</text>
+  <text x="130" y="270" font-family="monospace" font-size="14" fill="#83a598">set cursorline</text>
+  <!-- File tree sidebar -->
+  <rect x="100" y="120" width="180" height="250" fill="#282828"/>
+  <text x="120" y="150" font-family="monospace" font-size="12" fill="#d5c4a1">📁 src/</text>
+  <text x="120" y="175" font-family="monospace" font-size="12" fill="#d5c4a1">  📄 main.rs</text>
+  <text x="120" y="200" font-family="monospace" font-size="12" fill="#d5c4a1">  📄 lib.rs</text>
+  <text x="120" y="225" font-family="monospace" font-size="12" fill="#d5c4a1">📁 config/</text>
+  <text x="120" y="250" font-family="monospace" font-size="12" fill="#d5c4a1">  📄 init.lua</text>
+  <text x="400" y="480" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fbf1c7" text-anchor="middle">Gruvbox Material — Arch Linux</text>
+</svg>

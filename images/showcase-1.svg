@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2e3440;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b4252;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#81a1c1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#88c0d0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg1)"/>
+  <!-- Top panel -->
+  <rect x="0" y="0" width="800" height="36" fill="#2e3440" opacity="0.9"/>
+  <!-- Latte Dock bottom -->
+  <rect x="200" y="440" width="400" height="50" rx="25" fill="#2e3440" opacity="0.8"/>
+  <rect x="220" y="450" width="360" height="30" rx="15" fill="#3b4252"/>
+  <!-- Window -->
+  <rect x="100" y="80" width="600" height="320" rx="8" fill="#3b4252" stroke="#4c566a" stroke-width="2"/>
+  <rect x="100" y="80" width="600" height="36" rx="8" fill="#434c5e"/>
+  <circle cx="120" cy="98" r="6" fill="#bf616a"/>
+  <circle cx="140" cy="98" r="6" fill="#d08770"/>
+  <circle cx="160" cy="98" r="6" fill="#a3be8c"/>
+  <!-- Terminal content -->
+  <text x="120" y="140" font-family="monospace" font-size="14" fill="#d8dee9">$ neofetch</text>
+  <text x="120" y="170" font-family="monospace" font-size="14" fill="#81a1c1">████████████████████████████</text>
+  <text x="120" y="195" font-family="monospace" font-size="14" fill="#88c0d0">████████████████████████████</text>
+  <text x="120" y="220" font-family="monospace" font-size="14" fill="#8fbcbb">████████████████████████████</text>
+  <text x="120" y="245" font-family="monospace" font-size="14" fill="#a3be8c">████████████████████████████</text>
+  <text x="120" y="270" font-family="monospace" font-size="14" fill="#ebcb8b">████████████████████████████</text>
+  <text x="120" y="320" font-family="monospace" font-size="14" fill="#d8dee9">$ █</text>
+  <!-- KRunner -->
+  <rect x="250" y="120" width="300" height="50" rx="12" fill="#2e3440" opacity="0.95" stroke="#81a1c1" stroke-width="2"/>
+  <text x="400" y="155" font-family="sans-serif" font-size="16" fill="#d8dee9" text-anchor="middle">🔍 Search...</text>
+  <!-- Title -->
+  <text x="400" y="480" font-family="sans-serif" font-size="18" font-weight="bold" fill="#eceff4" text-anchor="middle">Nordic Minimal — Arch Linux</text>
+</svg>

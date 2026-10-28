@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Troubleshooting common KDE Plasma ricing issues on Arch Linux and NixOS">
+    <title>Troubleshooting - KDE Plasma Ricing Guide</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/troubleshooting.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </div>
+
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="../index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span class="logo-text">KDE Rice</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="arch-guide.html">Arch Linux</a></li>
+                <li><a href="nixos-guide.html">NixOS</a></li>
+                <li><a href="tools.html">Tools & Resources</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="troubleshooting.html" class="active">Troubleshooting</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="troubleshooting-main">
+        <header class="page-header">
+            <h1>Troubleshooting</h1>
+            <p>Solutions to common KDE Plasma ricing issues on Arch Linux and NixOS</p>
+        </header>
+
+        <nav class="trouble-sidebar" id="troubleSidebar">
+            <div class="sidebar-header">
+                <h3>Categories</h3>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="#installation" class="sidebar-link">Installation Issues</a></li>
+                <li><a href="#graphics" class="sidebar-link">Graphics & Wayland</a></li>
+                <li><a href="#theming" class="sidebar-link">Theming Problems</a></li>
+                <li><a href="#kwin" class="sidebar-link">KWin & Window Management</a></li>
+                <li><a href="#panels" class="sidebar-link">Panels & Widgets</a></li>
+                <li><a href="#audio" class="sidebar-link">Audio (PipeWire)</a></li>
+                <li><a href="#nixos" class="sidebar-link">NixOS Specific</a></li>
+                <li><a href="#performance" class="sidebar-link">Performance</a></li>
+            </ul>
+        </nav>
+
+        <div class="trouble-content">
+            <section id="installation" class="trouble-section">
+                <h2>Installation Issues</h2>
+
+                <div class="trouble-item">
+                    <h3>SDDM doesn't start / black screen on boot</h3>
+                    <div class="trouble-solution">
+                        <h4>Arch Linux</h4>
+                        <pre><code class="language-bash"># Check SDDM status
+systemctl status sddm
+
+# Check logs
+journalctl -u sddm -b
+
+# Common fix: ensure video group
+sudo usermod -aG video $USER
+
+# Reinstall if needed
+sudo pacman -S sddm
+sudo systemctl enable sddm</code></pre>
+                        <h4>NixOS</h4>
+                        <pre><code class="language-nix"># In configuration.nix
+services.xserver.displayManager.sddm.enable = true;
+services.xserver.enable = true;
+
+# For NVIDIA
+services.xserver.videoDrivers = [ "nvidia" ];
+hardware.nvidia.modesetting.enable = true;</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Plasma doesn't start / crashes on login</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Check plasmashell
+plasmashell --replace &
+
+# Check for missing dependencies
+plasmashell --version
+
+# Reset Plasma config (backup first!)
+mv ~/.config/plasma* ~/.config/plasma-backup-$(date +%s)
+mv ~/.config/kdeglobals ~/.config/kdeglobals-backup
+mv ~/.config/kwinrc ~/.config/kwinrc-backup
+
+# Restart session</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>"Could not start D-Bus" error</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Ensure dbus is running
+systemctl --user status dbus
+
+# Start if needed
+systemctl --user start dbus
+
+# For NixOS, ensure in configuration.nix
+services.dbus.enable = true;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="graphics" class="trouble-section">
+                <h2>Graphics & Wayland Issues</h2>
+
+                <div class="trouble-item">
+                    <h3>Wayland session not showing in SDDM</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Arch: Install plasma-wayland-session
+sudo pacman -S plasma-wayland-session
+
+# NixOS: Enable in configuration.nix
+services.xserver.desktopManager.plasma6.wayland = true;
+
+# Check available sessions
+ls /usr/share/wayland-sessions/</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>NVIDIA on Wayland: flickering, no VRR, poor performance</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Arch: Add kernel parameters
+# /etc/default/grub or /boot/loader/entries/arch.conf
+nvidia_drm.modeset=1 nvidia_drm.fbdev=1
+
+# NixOS:
+hardware.nvidia.modesetting.enable = true;
+hardware.nvidia.settings = {
+  AllowGSYNC = true;
+  AllowGSyncCompatible = true;
+};
+
+# Environment variables for Wayland
+# ~/.config/environment.d/envvars.conf
+GBM_BACKEND=nvidia-drm
+__GLX_VENDOR_LIBRARY_NAME=nvidia
+WLR_NO_HARDWARE_CURSORS=1</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Screen tearing on X11</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Force compositing vsync
+# System Settings > Display > Compositor
+# Rendering backend: OpenGL 3.1
+# VSync: Automatic or Re-use screen content
+
+# NVIDIA: Force composition pipeline
+nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline=On }"
+
+# Or use environment variable
+export KWIN_TRIPLE_BUFFER=1</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Multiple monitors: wrong scaling, arrangement</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># KScreen CLI for scripting
+kscreen-doctor output.1.scale.2 output.2.scale.1.5
+
+# Or use KScree GUI: System Settings > Display
+
+# For Wayland fractional scaling
+# ~/.config/kdeglobals
+[ScreenScaleFactors]
+eDP-1=1.5
+HDMI-1=1
+
+# NixOS: configure in home-manager
+services.xserver.desktopManager.plasma6.wayland = true;
+# Add to plasma config via home-manager</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="theming" class="trouble-section">
+                <h2>Theming Problems</h2>
+
+                <div class="trouble-item">
+                    <h3>GTK apps don't follow KDE theme</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Install kde-gtk-config
+sudo pacman -S kde-gtk-config
+
+# Run configuration
+kde-gtk-config
+
+# Or manually set:
+# ~/.config/gtk-3.0/settings.ini
+[Settings]
+gtk-theme-name=Breeze
+gtk-icon-theme-name=breeze
+gtk-font-name=Noto Sans 10
+gtk-cursor-theme-name=breeze_cursors
+
+# ~/.config/gtk-4.0/settings.ini (same content)
+
+# Environment variables
+export GTK_THEME=Breeze
+export GTK2_RC_FILES=/usr/share/themes/Breeze/gtk-2.0/gtkrc</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Kvantum theme not applying to Qt apps</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Ensure kvantum is installed
+sudo pacman -S kvantum-qt5 kvantum-qt6
+
+# Set environment variables
+# ~/.config/environment.d/envvars.conf
+QT_STYLE_OVERRIDE=kvantum
+QT_QPA_PLATFORMTHEME=kde
+
+# Apply theme
+kvantummanager --set Nordic
+
+# For specific apps, create ~/.config/Kvantum/kvantum.kvconfig
+[General]
+theme=Nordic</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Color scheme not applying to all apps</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Apply globally via CLI
+plasma-apply-colorscheme "Nordic"
+
+# Force reload for running apps
+# For Qt apps - restart them
+# For GTK apps - restart or:
+gsettings set org.gnome.desktop.interface gtk-theme "Breeze"
+gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+
+# Check kdeglobals
+grep -A5 "\[Colors\]" ~/.config/kdeglobals</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Custom theme not showing in System Settings</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Themes go in:
+~/.local/share/plasma/look-and-feel/     # Global themes
+~/.local/share/color-schemes/            # Color schemes
+~/.local/share/plasma/desktoptheme/      # Plasma themes
+~/.local/share/aurorae/themes/           # Window decorations
+~/.local/share/kwin/scripts/             # KWin scripts
+
+# Reload plasma
+kquitapp5 plasmashell && kstart5 plasmashell
+
+# Or for Plasma 6
+kquitapp6 plasmashell && kstart6 plasmashell</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="kwin" class="trouble-section">
+                <h2>KWin & Window Management</h2>
+
+                <div class="trouble-item">
+                    <h3>KWin scripts not loading (Krohnkite, Bismuth, etc.)</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Install scripts
+yay -S krohnkite-git bismuth-git
+
+# Enable in System Settings > Window Management > KWin Scripts
+# Or via CLI:
+kwriteconfig6 --file kwinrc --group Plugins --key krohnkiteEnabled true
+kwriteconfig6 --file kwinrc --group Plugins --key bismuthEnabled true
+
+# Restart KWin
+kwin_x11 --replace &    # X11
+kwin_wayland --replace & # Wayland</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Tiling not working / windows not tiling</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Check script is enabled
+kreadconfig6 --file kwinrc --group Plugins --key krohnkiteEnabled
+
+# Check Krohnkite config
+cat ~/.config/krohnkiterc
+
+# Common issue: "Tile new windows" not enabled
+kwriteconfig6 --file krohnkiterc --group General --key tileNewWindows true
+
+# Restart KWin after config changes
+kwin_x11 --replace &</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Window rules not applying</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Check rules file
+cat ~/.config/kwinrulesrc
+
+# Rule format - use exact window class
+# Get class with: xprop WM_CLASS
+# Click window, note second string
+
+# Example rule for Konsole on desktop 2
+[Rule-1]
+Description=Konsole Desktop 2
+wmclass=konsole
+wmclassmatch=1
+desktop=1
+desktoprule=2
+
+# Reload rules
+qdbus org.kde.KWin /KWin reconfigure</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>KWin crashes / freezes</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Check for crash logs
+journalctl --user -u plasma-kwin_wayland -b
+journalctl --user -u plasma-kwin_x11 -b
+
+# Disable compositing temporarily
+kwriteconfig6 --file kwinrc --group Compositing --key Enabled false
+kwin_x11 --replace &
+
+# Reset KWin config
+mv ~/.config/kwinrc ~/.config/kwinrc-backup
+kwin_x11 --replace &</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="panels" class="trouble-section">
+                <h2>Panels & Widgets</h2>
+
+                <div class="trouble-item">
+                    <h3>Panel/widget configuration lost after update</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Backup panel config
+cp ~/.config/plasma-org.kde.plasma.desktop-appletsrc ~/panel-backup-$(date +%s).rc
+
+# Restore from backup
+cp ~/panel-backup-*.rc ~/.config/plasma-org.kde.plasma.desktop-appletsrc
+kquitapp5 plasmashell && kstart5 plasmashell
+
+# For Latte Dock layouts
+cp ~/.local/share/latte/layouts/my-layout.layout.latte ~/latte-backup.latte</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Latte Dock not starting / crashing</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Check for errors
+latte-dock --replace &
+
+# Reset Latte config
+mv ~/.config/latte ~/.config/latte-backup
+latte-dock &
+
+# Ensure it's in autostart
+# System Settings > Startup and Shutdown > Autostart
+# Add: latte-dock --replace</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>System tray icons missing</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Install SNI support
+sudo pacman -S libappindicator-gtk3 libappindicator-gtk2
+
+# For NixOS
+environment.systemPackages = with pkgs; [
+  libappindicator-gtk3
+  libappindicator-gtk2
+];
+
+# Restart plasma
+kquitapp5 plasmashell && kstart5 plasmashell</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="audio" class="trouble-section">
+                <h2>Audio (PipeWire)</h2>
+
+                <div class="trouble-item">
+                    <h3>No sound / PipeWire not starting</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Check PipeWire status
+systemctl --user status pipewire pipewire-pulse wireplumber
+
+# Start services
+systemctl --user start pipewire pipewire-pulse wireplumber
+systemctl --user enable pipewire pipewire-pulse wireplumber
+
+# Check for conflicts (remove pulseaudio if present)
+sudo pacman -Rns pulseaudio
+
+# NixOS: ensure in configuration.nix
+services.pipewire = {
+  enable = true;
+  alsa.enable = true;
+  pulse.enable = true;
+};</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Bluetooth audio not working</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Install bluez and pipewire bluetooth
+sudo pacman -S bluez bluez-utils pipewire-audio
+
+# Enable bluetooth
+sudo systemctl enable --now bluetooth
+
+# Pair/connect via bluetoothctl
+bluetoothctl
+# power on
+# agent on
+# default-agent
+# scan on
+# pair MAC
+# connect MAC
+# trust MAC</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="nixos" class="trouble-section">
+                <h2>NixOS Specific Issues</h2>
+
+                <div class="trouble-item">
+                    <h3>Flake evaluation error / build fails</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Check flake syntax
+nix flake check
+
+# Show detailed error
+nixos-rebuild switch --flake .#desktop --show-trace
+
+# Common issues:
+# 1. Missing sha256 for fetchFromGitHub
+# 2. Incorrect input references
+# 3. Module import errors
+
+# Update flake inputs
+nix flake update</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Home Manager modules not applying</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Check Home Manager status
+home-manager generations
+
+# Switch manually
+home-manager switch --flake .#user@host
+
+# Check activation scripts
+home-manager build --flake .#user@host
+
+# Ensure home-manager is in NixOS config
+{ config, pkgs, ... }:
+{
+  imports = [ home-manager.nixosModules.home-manager ];
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.youruser = { ... };
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Configuration changes not taking effect</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Rebuild system
+sudo nixos-rebuild switch --flake .#desktop
+
+# For user config only
+home-manager switch --flake .#user@desktop
+
+# Check which generation is active
+nixos-rebuild list-generations
+
+# Rollback if needed
+sudo nixos-rebuild switch --rollback</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Nix store full / out of disk space</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Check disk usage
+nix-store --gc
+
+# Delete old generations (keep 30 days)
+sudo nix-collect-garbage --delete-older-than 30d
+
+# Optimize store
+nix store optimise
+
+# Add to configuration.nix for auto-cleanup
+nix.gc = {
+  automatic = true;
+  dates = "weekly";
+  options = "--delete-older-than 30d";
+};</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="performance" class="trouble-section">
+                <h2>Performance Optimization</h2>
+
+                <div class="trouble-item">
+                    <h3>High CPU/RAM usage by plasmashell</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Check resource usage
+htop -u $USER
+
+# Disable unused effects
+# System Settings > Workspace Behavior > Desktop Effects
+# Uncheck: Blur, Slide, Fade, etc.
+
+# Reduce compositor load
+kwriteconfig6 --file kwinrc --group Compositing --key MaxFPS 60
+kwriteconfig6 --file kwinrc --group Compositing --key RefreshRate 60
+
+# Disable file indexing if not needed
+balooctl disable
+balooctl purge</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Slow application startup</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Preload commonly used apps
+sudo pacman -S preload
+sudo systemctl enable --now preload
+
+# Or use systemd service for plasma
+# ~/.config/systemd/user/plasma-preload.service
+[Unit]
+Description=Preload Plasma libraries
+DefaultDependencies=no
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/preload-plasma
+
+[Install]
+WantedBy=graphical-session.target</code></pre>
+                    </div>
+                </div>
+
+                <div class="trouble-item">
+                    <h3>Battery life on laptops</h3>
+                    <div class="trouble-solution">
+                        <pre><code class="language-bash"># Install power management
+sudo pacman -S tlp tlp-rdw
+sudo systemctl enable --now tlp
+
+# Or use power-profiles-daemon
+sudo pacman -S power-profiles-daemon
+systemctl --user enable --now power-profiles-daemon
+
+# KDE Power Management
+# System Settings > Power Management
+# Enable: Dim screen, Suspend session
+
+# For NVIDIA laptops
+# Use optimus-manager or envycontrol for GPU switching
+yay -S optimus-manager
+# or
+yay -S envycontrol</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="trouble-section">
+                <h2>Still Having Issues?</h2>
+                <div class="help-resources">
+                    <div class="help-card">
+                        <h3>Check Logs First</h3>
+                        <pre><code class="language-bash"># System logs
+journalctl -b -p err
+
+# User session logs
+journalctl --user -b -p err
+
+# KDE specific
+journalctl --user -u plasma-plasmashell -b
+journalctl --user -u plasma-kwin_wayland -b</code></pre>
+                    </div>
+                    <div class="help-card">
+                        <h3>Community Support</h3>
+                        <ul>
+                            <li><a href="https://reddit.com/r/kde" target="_blank">r/kde</a> - KDE community</li>
+                            <li><a href="https://reddit.com/r/kde_neon" target="_blank">r/kde_neon</a> - Plasma testing</li>
+                            <li><a href="https://reddit.com/r/NixOS" target="_blank">r/NixOS</a> - NixOS help</li>
+                            <li><a href="https://matrix.to/#/#kde:matrix.org" target="_blank">KDE Matrix</a> - Real-time chat</li>
+                            <li><a href="https://forum.kde.org/" target="_blank">KDE Forum</a> - Official forums</li>
+                        </ul>
+                    </div>
+                    <div class="help-card">
+                        <h3>Debug Mode</h3>
+                        <pre><code class="language-bash"># Enable debug for plasmashell
+QT_LOGGING_RULES="*.debug=true" plasmashell --replace &
+
+# KWin debug
+KWIN_DEBUG=1 kwin_x11 --replace &
+
+# DBus monitoring
+dbus-monitor --session "interface='org.kde.KWin'"</code></pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <span class="logo-text">KDE Rice</span>
+                    </a>
+                    <p>Your comprehensive guide to ricing KDE Plasma on Arch Linux and NixOS</p>
+                </div>
+                <nav class="footer-nav">
+                    <div class="footer-section">
+                        <h4>Guides</h4>
+                        <ul>
+                            <li><a href="arch-guide.html">Arch Linux Guide</a></li>
+                            <li><a href="nixos-guide.html">NixOS Guide</a></li>
+                            <li><a href="tools.html">Tools & Resources</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="https://reddit.com/r/kde" target="_blank">r/kde</a></li>
+                            <li><a href="https://reddit.com/r/unixporn" target="_blank">r/unixporn</a></li>
+                            <li><a href="https://matrix.to/#/#kde:matrix.org" target="_blank">Matrix Chat</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://store.kde.org/" target="_blank">KDE Store</a></li>
+                            <li><a href="https://wiki.archlinux.org/" target="_blank">Arch Wiki</a></li>
+                            <li><a href="https://nixos.wiki/" target="_blank">NixOS Wiki</a></li>
+                            <li><a href="https://github.com/" target="_blank">GitHub Dotfiles</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KDE Rice Guide. Built with <span class="heart">♥</span> for the ricing community.</p>
+                <p class="footer-note">Not affiliated with KDE e.V., Arch Linux, or NixOS Foundation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/troubleshooting.js"></script>
+</body>
+</html>

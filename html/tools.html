@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Essential tools and resources for KDE Plasma ricing on Arch Linux and NixOS">
+    <title>Tools & Resources - KDE Plasma Ricing Guide</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/tools.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </div>
+
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="../index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span class="logo-text">KDE Rice</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="arch-guide.html">Arch Linux</a></li>
+                <li><a href="nixos-guide.html">NixOS</a></li>
+                <li><a href="tools.html" class="active">Tools & Resources</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="troubleshooting.html">Troubleshooting</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="tools-main">
+        <header class="page-header">
+            <h1>Tools & Resources</h1>
+            <p>Everything you need to rice KDE Plasma like a pro</p>
+        </header>
+
+        <section class="tools-section">
+            <h2 class="section-title">Essential Packages</h2>
+            <div class="tools-grid">
+                <article class="tool-card" data-category="core">
+                    <div class="tool-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h3>Core KDE Packages</h3>
+                    <div class="tool-install">
+                        <h4>Arch Linux</h4>
+                        <pre><code>pacman -S plasma-meta konsole dolphin \
+    firefox systemsettings kde-gtk-config \
+    sddm plasma-wayland-session \
+    kvantum-qt5 kvantum-qt6 \
+    kdeconnect plasma-browser-integration \
+    xdg-desktop-portal-kde</code></pre>
+                        <h4>NixOS</h4>
+                        <pre><code>environment.systemPackages = with pkgs; [
+    plasma6.packages.plasma-browser-integration
+    plasma6.packages.kde-gtk-config
+    plasma6.packages.kvantum
+    plasma6.packages.kvantum-qt5
+    plasma6.packages.kvantum-qt6
+    plasma6.packages.kdeconnect
+  ];</code></pre>
+                    </div>
+                </article>
+
+                <article class="tool-card" data-category="theming">
+                    <div class="tool-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </div>
+                    <h3>Theming Engines</h3>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <span class="tool-name">Kvantum</span>
+                            <span class="tool-desc">Qt theming engine with SVG-based themes</span>
+                            <span class="tool-install-arch">pacman -S kvantum-qt5 kvantum-qt6</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Plasma Style (plasmastyle)</span>
+                            <span class="tool-desc">CLI tool for applying global themes</span>
+                            <span class="tool-install-arch">yay -S plasmastyle</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">KDE GTK Config</span>
+                            <span class="tool-desc">Sync GTK themes with KDE color scheme</span>
+                            <span class="tool-install-arch">pacman -S kde-gtk-config</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="tool-card" data-category="docks">
+                    <div class="tool-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </div>
+                    <h3>Docks & Panels</h3>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <span class="tool-name">Latte Dock</span>
+                            <span class="tool-desc">Modern, configurable dock with plasma integration</span>
+                            <span class="tool-install-arch">yay -S latte-dock-git</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Plasma Panels</span>
+                            <span class="tool-desc">Built-in, highly customizable panels</span>
+                            <span class="tool-install-arch">Included in plasma-workspace</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">KDE Connect</span>
+                            <span class="tool-desc">Phone integration, notifications, clipboard sync</span>
+                            <span class="tool-install-arch">pacman -S kdeconnect</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="tool-card" data-category="tiling">
+                    <div class="tool-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                        </svg>
+                    </div>
+                    <h3>KWin Tiling Scripts</h3>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <span class="tool-name">Krohnkite</span>
+                            <span class="tool-desc">i3-like dynamic tiling for KWin</span>
+                            <span class="tool-install-arch">yay -S krohnkite-git</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Bismuth</span>
+                            <span class="tool-desc">Automatic tiling with flexible layouts</span>
+                            <span class="tool-install-arch">yay -S bismuth-git</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Polonium</span>
+                            <span class="tool-desc">Keyboard-driven window management</span>
+                            <span class="tool-install-arch">yay -S kwin-script-polonium-git</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="tool-card" data-category="cli">
+                    <div class="tool-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <h3>CLI Ricing Tools</h3>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <span class="tool-name">kwriteconfig6 / kwriteconfig5</span>
+                            <span class="tool-desc">Write KDE config files from command line</span>
+                            <span class="tool-install-arch">Included in plasma-workspace</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">kreadconfig6 / kreadconfig5</span>
+                            <span class="tool-desc">Read KDE config values</span>
+                            <span class="tool-install-arch">Included in plasma-workspace</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">plasma-apply-colorscheme</span>
+                            <span class="tool-desc">Apply color schemes globally</span>
+                            <span class="tool-install-arch">Included in plasma-workspace</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">plasma-apply-lookandfeel</span>
+                            <span class="tool-desc">Apply global themes</span>
+                            <span class="tool-install-arch">Included in plasma-workspace</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">kvantummanager</span>
+                            <span class="tool-desc">Manage Kvantum themes</span>
+                            <span class="tool-install-arch">pacman -S kvantum-qt5 kvantum-qt6</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">qdbus / dbus-send</span>
+                            <span class="tool-desc">Interact with KDE via D-Bus</span>
+                            <span class="tool-install-arch">pacman -S qt6-tools</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="tool-card" data-category="backup">
+                    <div class="tool-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Backup & Sync Tools</h3>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <span class="tool-name">Git (Bare Repo)</span>
+                            <span class="tool-desc">Version control for dotfiles</span>
+                            <span class="tool-install-arch">pacman -S git</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Stow</span>
+                            <span class="tool-desc">Symlink farm manager for dotfiles</span>
+                            <span class="tool-install-arch">pacman -S stow</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Home Manager</span>
+                            <span class="tool-desc">Declarative user config (NixOS/Arch)</span>
+                            <span class="tool-install-arch">Via Nix</span>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Timeshift</span>
+                            <span class="tool-desc">System snapshots & rollback</span>
+                            <span class="tool-install-arch">pacman -S timeshift</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="tools-section">
+            <h2 class="section-title">Popular Theme Collections</h2>
+            <div class="theme-collections">
+                <div class="theme-collection">
+                    <div class="collection-header">
+                        <div class="collection-colors nordic"></div>
+                        <div class="collection-info">
+                            <h3>Nordic</h3>
+                            <p>Nord-inspired, clean and minimal</p>
+                        </div>
+                    </div>
+                    <div class="collection-links">
+                        <a href="https://github.com/EliverLara/Nordic-kde" target="_blank" class="btn btn-sm">GitHub</a>
+                        <a href="https://store.kde.org/p/1315146/" target="_blank" class="btn btn-sm btn-outline">KDE Store</a>
+                    </div>
+                </div>
+                <div class="theme-collection">
+                    <div class="collection-header">
+                        <div class="collection-colors catppuccin"></div>
+                        <div class="collection-info">
+                            <h3>Catppuccin</h3>
+                            <p>Soothing pastel theme with 4 flavors</p>
+                        </div>
+                    </div>
+                    <div class="collection-links">
+                        <a href="https://github.com/catppuccin/kde" target="_blank" class="btn btn-sm">GitHub</a>
+                        <a href="https://store.kde.org/p/2107346/" target="_blank" class="btn btn-sm btn-outline">KDE Store</a>
+                    </div>
+                </div>
+                <div class="theme-collection">
+                    <div class="collection-header">
+                        <div class="collection-colors gruvbox"></div>
+                        <div class="collection-info">
+                            <h3>Gruvbox</h3>
+                            <p>Retro groove, warm colors</p>
+                        </div>
+                    </div>
+                    <div class="collection-links">
+                        <a href="https://github.com/gruvbox-community/gruvbox-kde" target="_blank" class="btn btn-sm">GitHub</a>
+                        <a href="https://store.kde.org/p/1343625/" target="_blank" class="btn btn-sm btn-outline">KDE Store</a>
+                    </div>
+                </div>
+                <div class="theme-collection">
+                    <div class="collection-header">
+                        <div class="collection-colors tokyo-night"></div>
+                        <div class="collection-info">
+                            <h3>Tokyo Night</h3>
+                            <p>Dark VS Code-inspired theme</p>
+                        </div>
+                    </div>
+                    <div class="collection-links">
+                        <a href="https://github.com/faustomorales/tokyo-night-kde-theme" target="_blank" class="btn btn-sm">GitHub</a>
+                        <a href="https://store.kde.org/p/1544321/" target="_blank" class="btn btn-sm btn-outline">KDE Store</a>
+                    </div>
+                </div>
+                <div class="theme-collection">
+                    <div class="collection-header">
+                        <div class="collection-colors dracula"></div>
+                        <div class="collection-info">
+                            <h3>Dracula</h3>
+                            <p>Dark theme for 295+ apps</p>
+                        </div>
+                    </div>
+                    <div class="collection-links">
+                        <a href="https://draculatheme.com/kde" target="_blank" class="btn btn-sm">Website</a>
+                        <a href="https://store.kde.org/p/1463620/" target="_blank" class="btn btn-sm btn-outline">KDE Store</a>
+                    </div>
+                </div>
+                <div class="theme-collection">
+                    <div class="collection-header">
+                        <div class="collection-colors rose-pine"></div>
+                        <div class="collection-info">
+                            <h3>Rose Pine</h3>
+                            <p>Soho vibes, pine & roses</p>
+                        </div>
+                    </div>
+                    <div class="collection-links">
+                        <a href="https://github.com/rose-pine/kde" target="_blank" class="btn btn-sm">GitHub</a>
+                        <a href="https://store.kde.org/p/2094146/" target="_blank" class="btn btn-sm btn-outline">KDE Store</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools-section">
+            <h2 class="section-title">Useful Widgets & Plasmoids</h2>
+            <div class="widgets-grid">
+                <div class="widget-category">
+                    <h3>System Monitoring</h3>
+                    <ul class="widget-list">
+                        <li><strong>System Monitor</strong> - CPU, RAM, Network, Disk graphs</li>
+                        <li><strong>Thermal Monitor</strong> - CPU/GPU temperatures</li>
+                        <li><strong>Network Speed</strong> - Upload/download rates</li>
+                        <li><strong>Battery & Brightness</strong> - Laptop essentials</li>
+                    </ul>
+                </div>
+                <div class="widget-category">
+                    <h3>Productivity</h3>
+                    <ul class="widget-list">
+                        <li><strong>Clipboard History</strong> - Press Meta+V</li>
+                        <li><strong>KRunner</strong> - Alt+Space launcher</li>
+                        <li><strong>Virtual Desktop Bar</strong> - Quick desktop switching</li>
+                        <li><strong>Global Menu</strong> - App menus in panel</li>
+                    </ul>
+                </div>
+                <div class="widget-category">
+                    <h3>Appearance</h3>
+                    <ul class="widget-list">
+                        <li><strong>Weather Widget</strong> - Current conditions</li>
+                        <li><strong>Better Inline Clock</strong> - Customizable clock</li>
+                        <li><strong>Wallpaper Slideshow</strong> - Rotating backgrounds</li>
+                        <li><strong>Color Picker</strong> - Pick colors from screen</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools-section">
+            <h2 class="section-title">Configuration Files Reference</h2>
+            <div class="config-files">
+                <div class="config-file">
+                    <h4>~/.config/kdeglobals</h4>
+                    <p>Main KDE settings: fonts, colors, UI behavior, shortcuts</p>
+                </div>
+                <div class="config-file">
+                    <h4>~/.config/kwinrc</h4>
+                    <p>Window manager: borders, effects, rules, tiling</p>
+                </div>
+                <div class="config-file">
+                    <h4>~/.config/plasma-org.kde.plasma.desktop-appletsrc</h4>
+                    <p>Panel layout, widgets, wallpapers, containment</p>
+                </div>
+                <div class="config-file">
+                    <h4>~/.config/kglobalshortcutsrc</h4>
+                    <p>Global keyboard shortcuts</p>
+                </div>
+                <div class="config-file">
+                    <h4>~/.config/kwinrulesrc</h4>
+                    <p>Window-specific rules (position, size, desktop)</p>
+                </div>
+                <div class="config-file">
+                    <h4>~/.config/kvantum/kvantum.kvconfig</h4>
+                    <p>Kvantum theme settings</p>
+                </div>
+                <div class="config-file">
+                    <h4>~/.local/share/color-schemes/</h4>
+                    <p>Custom color scheme files (.colors)</p>
+                </div>
+                <div class="config-file">
+                    <h4>~/.local/share/plasma/look-and-feel/</h4>
+                    <p>Global theme packages</p>
+                </div>
+                <div class="config-file">
+                    <h4>~/.local/share/kwin/scripts/</h4>
+                    <p>KWin script installations</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools-section">
+            <h2 class="section-title">Online Resources</h2>
+            <div class="resources-grid">
+                <a href="https://wiki.archlinux.org/title/KDE" target="_blank" class="resource-card">
+                    <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                    <h4>Arch Wiki - KDE</h4>
+                    <p>Comprehensive Arch-specific KDE documentation</p>
+                </a>
+                <a href="https://nixos.wiki/wiki/KDE" target="_blank" class="resource-card">
+                    <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                    <h4>NixOS Wiki - KDE</h4>
+                    <p>NixOS-specific Plasma configuration</p>
+                </a>
+                <a href="https://store.kde.org/" target="_blank" class="resource-card">
+                    <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg></div>
+                    <h4>KDE Store</h4>
+                    <p>Themes, widgets, wallpapers, color schemes</p>
+                </a>
+                <a href="https://github.com/r/unixporn" target="_blank" class="resource-card">
+                    <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></div>
+                    <h4>r/unixporn</h4>
+                    <p>Desktop customization showcase & inspiration</p>
+                </a>
+                <a href="https://www.reddit.com/r/kde/" target="_blank" class="resource-card">
+                    <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg></div>
+                    <h4>r/kde</h4>
+                    <p>KDE community discussions & help</p>
+                </a>
+                <a href="https://matrix.to/#/#kde:matrix.org" target="_blank" class="resource-card">
+                    <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><path d="M22 3H2l-4 4 4 4 4-4z"></path></svg></div>
+                    <h4>KDE Matrix Chat</h4>
+                    <p>Real-time KDE community support</p>
+                </a>
+                <a href="https://github.com/adi1090x/kde-plasma-themes" target="_blank" class="resource-card">
+                    <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></div>
+                    <h4>Adi1090x Themes</h4>
+                    <p>Beautiful pre-made themes with install scripts</p>
+                </a>
+                <a href="https://github.com/EliverLara/Nordic" target="_blank" class="resource-card">
+                    <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></div>
+                    <h4>Nordic KDE</h4>
+                    <p>Popular Nord-inspired theme suite</p>
+                </a>
+                <a href="https://github.com/catppuccin/kde" target="_blank" class="resource-card">
+                    <div class="resource-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></div>
+                    <h4>Catppuccin KDE</h4>
+                    <p>Soothing pastel theme for KDE Plasma</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <span class="logo-text">KDE Rice</span>
+                    </a>
+                    <p>Your comprehensive guide to ricing KDE Plasma on Arch Linux and NixOS</p>
+                </div>
+                <nav class="footer-nav">
+                    <div class="footer-section">
+                        <h4>Guides</h4>
+                        <ul>
+                            <li><a href="arch-guide.html">Arch Linux Guide</a></li>
+                            <li><a href="nixos-guide.html">NixOS Guide</a></li>
+                            <li><a href="tools.html">Tools & Resources</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="https://reddit.com/r/kde" target="_blank">r/kde</a></li>
+                            <li><a href="https://reddit.com/r/unixporn" target="_blank">r/unixporn</a></li>
+                            <li><a href="https://matrix.to/#/#kde:matrix.org" target="_blank">Matrix Chat</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://store.kde.org/" target="_blank">KDE Store</a></li>
+                            <li><a href="https://wiki.archlinux.org/" target="_blank">Arch Wiki</a></li>
+                            <li><a href="https://nixos.wiki/" target="_blank">NixOS Wiki</a></li>
+                            <li><a href="https://github.com/" target="_blank">GitHub Dotfiles</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KDE Rice Guide. Built with <span class="heart">♥</span> for the ricing community.</p>
+                <p class="footer-note">Not affiliated with KDE e.V., Arch Linux, or NixOS Foundation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

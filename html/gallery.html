@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Community KDE Plasma rice showcase - Arch Linux and NixOS">
+    <title>Gallery - KDE Plasma Ricing Guide</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/gallery.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </div>
+
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="../index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span class="logo-text">KDE Rice</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="arch-guide.html">Arch Linux</a></li>
+                <li><a href="nixos-guide.html">NixOS</a></li>
+                <li><a href="tools.html">Tools & Resources</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="troubleshooting.html">Troubleshooting</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="gallery-main">
+        <header class="page-header">
+            <h1>Rice Gallery</h1>
+            <p>Community showcase of riced KDE Plasma desktops</p>
+        </header>
+
+        <div class="gallery-toolbar">
+            <div class="filter-group">
+                <label for="distroFilter">Distro</label>
+                <select id="distroFilter">
+                    <option value="all">All</option>
+                    <option value="arch">Arch Linux</option>
+                    <option value="nixos">NixOS</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="themeFilter">Theme</label>
+                <select id="themeFilter">
+                    <option value="all">All</option>
+                    <option value="nordic">Nordic</option>
+                    <option value="catppuccin">Catppuccin</option>
+                    <option value="gruvbox">Gruvbox</option>
+                    <option value="tokyo-night">Tokyo Night</option>
+                    <option value="dracula">Dracula</option>
+                    <option value="rose-pine">Rose Pine</option>
+                    <option value="custom">Custom</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="styleFilter">Style</label>
+                <select id="styleFilter">
+                    <option value="all">All</option>
+                    <option value="minimal">Minimal</option>
+                    <option value="tiling">Tiling</option>
+                    <option value="dock">Dock-based</option>
+                    <option value="traditional">Traditional</option>
+                    <option value="wayland">Wayland</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="sortFilter">Sort</label>
+                <select id="sortFilter">
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="popular">Most Popular</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Rice 1: Nordic Minimal Arch -->
+            <article class="gallery-item" data-distro="arch" data-theme="nordic" data-style="minimal" data-date="2024-01-15" data-popularity="95">
+                <div class="gallery-image">
+                    <img src="../images/showcase-1.svg" alt="Nordic Minimal rice on Arch" loading="lazy">
+                    <div class="gallery-overlay">
+                        <button class="btn btn-primary view-details" data-rice="rice-1">View Details</button>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Nordic Minimal</h3>
+                    <div class="gallery-meta">
+                        <span class="tag tag-arch">Arch</span>
+                        <span class="tag tag-theme">Nordic</span>
+                        <span class="tag tag-style">Minimal</span>
+                    </div>
+                    <p class="gallery-desc">Clean Nordic theme with Latte Dock, minimal panel, and krohnkite tiling</p>
+                    <div class="gallery-author">
+                        <img src="../images/avatar-1.svg" alt="User" class="avatar">
+                        <span>by <a href="#" target="_blank">@linuxrice</a></span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Rice 2: Catppuccin Tiling NixOS -->
+            <article class="gallery-item" data-distro="nixos" data-theme="catppuccin" data-style="tiling" data-date="2024-01-20" data-popularity="88">
+                <div class="gallery-image">
+                    <img src="../images/showcase-2.svg" alt="Catppuccin tiling rice on NixOS" loading="lazy">
+                    <div class="gallery-overlay">
+                        <button class="btn btn-primary view-details" data-rice="rice-2">View Details</button>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Catppuccin Mocha Tiling</h3>
+                    <div class="gallery-meta">
+                        <span class="tag tag-nixos">NixOS</span>
+                        <span class="tag tag-theme">Catppuccin</span>
+                        <span class="tag tag-style">Tiling</span>
+                    </div>
+                    <p class="gallery-desc">Declarative NixOS config with Bismuth tiling, Catppuccin Mocha, and Home Manager</p>
+                    <div class="gallery-author">
+                        <img src="../images/avatar-2.svg" alt="User" class="avatar">
+                        <span>by <a href="#" target="_blank">@nixosrice</a></span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Rice 3: Gruvbox Custom Arch -->
+            <article class="gallery-item" data-distro="arch" data-theme="gruvbox" data-style="dock" data-date="2024-02-01" data-popularity="92">
+                <div class="gallery-image">
+                    <img src="../images/showcase-3.svg" alt="Gruvbox custom rice on Arch" loading="lazy">
+                    <div class="gallery-overlay">
+                        <button class="btn btn-primary view-details" data-rice="rice-3">View Details</button>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Gruvbox Material</h3>
+                    <div class="gallery-meta">
+                        <span class="tag tag-arch">Arch</span>
+                        <span class="tag tag-theme">Gruvbox</span>
+                        <span class="tag tag-style">Dock</span>
+                    </div>
+                    <p class="gallery-desc">Warm Gruvbox colors with custom Latte Dock layout, Kvantum theming</p>
+                    <div class="gallery-author">
+                        <img src="../images/avatar-3.svg" alt="User" class="avatar">
+                        <span>by <a href="#" target="_blank">@gruvboxfan</a></span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Rice 4: Tokyo Night Wayland NixOS -->
+            <article class="gallery-item" data-distro="nixos" data-theme="tokyo-night" data-style="wayland" data-date="2024-02-10" data-popularity="85">
+                <div class="gallery-image">
+                    <img src="../images/showcase-4.svg" alt="Tokyo Night Wayland rice on NixOS" loading="lazy">
+                    <div class="gallery-overlay">
+                        <button class="btn btn-primary view-details" data-rice="rice-4">View Details</button>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Tokyo Night Wayland</h3>
+                    <div class="gallery-meta">
+                        <span class="tag tag-nixos">NixOS</span>
+                        <span class="tag tag-theme">Tokyo Night</span>
+                        <span class="tag tag-style">Wayland</span>
+                    </div>
+                    <p class="gallery-desc">Pure Wayland session with Tokyo Night, custom KWin effects</p>
+                    <div class="gallery-author">
+                        <img src="../images/avatar-4.svg" alt="User" class="avatar">
+                        <span>by <a href="#" target="_blank">@waylandrice</a></span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Rice 5: Dracula Minimal Arch -->
+            <article class="gallery-item" data-distro="arch" data-theme="dracula" data-style="minimal" data-date="2024-02-15" data-popularity="78">
+                <div class="gallery-image">
+                    <img src="../images/showcase-5.svg" alt="Dracula minimal rice on Arch" loading="lazy">
+                    <div class="gallery-overlay">
+                        <button class="btn btn-primary view-details" data-rice="rice-5">View Details</button>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Dracula Minimal</h3>
+                    <div class="gallery-meta">
+                        <span class="tag tag-arch">Arch</span>
+                        <span class="tag tag-theme">Dracula</span>
+                        <span class="tag tag-style">Minimal</span>
+                    </div>
+                    <p class="gallery-desc">Classic Dracula theme with hidden panel, KRunner-only workflow</p>
+                    <div class="gallery-author">
+                        <img src="../images/avatar-5.svg" alt="User" class="avatar">
+                        <span>by <a href="#" target="_blank">@dracularice</a></span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Rice 6: Rose Pine Traditional NixOS -->
+            <article class="gallery-item" data-distro="nixos" data-theme="rose-pine" data-style="traditional" data-date="2024-02-20" data-popularity="82">
+                <div class="gallery-image">
+                    <img src="../images/showcase-6.svg" alt="Rose Pine traditional rice on NixOS" loading="lazy">
+                    <div class="gallery-overlay">
+                        <button class="btn btn-primary view-details" data-rice="rice-6">View Details</button>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Rose Pine Dawn</h3>
+                    <div class="gallery-meta">
+                        <span class="tag tag-nixos">NixOS</span>
+                        <span class="tag tag-theme">Rose Pine</span>
+                        <span class="tag tag-style">Traditional</span>
+                    </div>
+                    <p class="gallery-desc">Light Rose Pine variant with traditional panel layout</p>
+                    <div class="gallery-author">
+                        <img src="../images/avatar-6.svg" alt="User" class="avatar">
+                        <span>by <a href="#" target="_blank">@pineuser</a></span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Rice 7: Custom Nord Arch -->
+            <article class="gallery-item" data-distro="arch" data-theme="custom" data-style="tiling" data-date="2024-03-01" data-popularity="90">
+                <div class="gallery-image">
+                    <img src="../images/showcase-7.svg" alt="Custom Nord rice on Arch" loading="lazy">
+                    <div class="gallery-overlay">
+                        <button class="btn btn-primary view-details" data-rice="rice-7">View Details</button>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Custom Nord Build</h3>
+                    <div class="gallery-meta">
+                        <span class="tag tag-arch">Arch</span>
+                        <span class="tag tag-theme">Custom</span>
+                        <span class="tag tag-style">Tiling</span>
+                    </div>
+                    <p class="gallery-desc">Hand-crafted Nord variant with custom color scheme, Krohnkite</p>
+                    <div class="gallery-author">
+                        <img src="../images/avatar-7.svg" alt="User" class="avatar">
+                        <span>by <a href="#" target="_blank">@customricer</a></span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Rice 8: Everforest NixOS -->
+            <article class="gallery-item" data-distro="nixos" data-theme="custom" data-style="dock" data-date="2024-03-05" data-popularity="75">
+                <div class="gallery-image">
+                    <img src="../images/showcase-8.svg" alt="Everforest rice on NixOS" loading="lazy">
+                    <div class="gallery-overlay">
+                        <button class="btn btn-primary view-details" data-rice="rice-8">View Details</button>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Everforest NixOS</h3>
+                    <div class="gallery-meta">
+                        <span class="tag tag-nixos">NixOS</span>
+                        <span class="tag tag-theme">Custom</span>
+                        <span class="tag tag-style">Dock</span>
+                    </div>
+                    <p class="gallery-desc">Everforest theme ported to KDE with Latte Dock, declarative config</p>
+                    <div class="gallery-author">
+                        <img src="../images/avatar-8.svg" alt="User" class="avatar">
+                        <span>by <a href="#" target="_blank">@forestrice</a></span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="gallery-pagination">
+            <button class="btn btn-outline" id="prevPage" disabled>Previous</button>
+            <span class="page-info" id="pageInfo">Page 1 of 1</span>
+            <button class="btn btn-outline" id="nextPage" disabled>Next</button>
+        </div>
+
+        <!-- Rice Detail Modals -->
+        <div class="modal-overlay" id="riceModal">
+            <div class="modal" id="modalContent">
+                <button class="modal-close" id="modalClose" aria-label="Close modal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="modal-body" id="modalBody"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <span class="logo-text">KDE Rice</span>
+                    </a>
+                    <p>Your comprehensive guide to ricing KDE Plasma on Arch Linux and NixOS</p>
+                </div>
+                <nav class="footer-nav">
+                    <div class="footer-section">
+                        <h4>Guides</h4>
+                        <ul>
+                            <li><a href="arch-guide.html">Arch Linux Guide</a></li>
+                            <li><a href="nixos-guide.html">NixOS Guide</a></li>
+                            <li><a href="tools.html">Tools & Resources</a></li>
+                            <li><a href="troubleshooting.html">Troubleshooting</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="https://reddit.com/r/kde" target="_blank">r/kde</a></li>
+                            <li><a href="https://reddit.com/r/unixporn" target="_blank">r/unixporn</a></li>
+                            <li><a href="https://matrix.to/#/#kde:matrix.org" target="_blank">Matrix Chat</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://store.kde.org/" target="_blank">KDE Store</a></li>
+                            <li><a href="https://wiki.archlinux.org/" target="_blank">Arch Wiki</a></li>
+                            <li><a href="https://nixos.wiki/" target="_blank">NixOS Wiki</a></li>
+                            <li><a href="https://github.com/" target="_blank">GitHub Dotfiles</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KDE Rice Guide. Built with <span class="heart">♥</span> for the ricing community.</p>
+                <p class="footer-note">Not affiliated with KDE e.V., Arch Linux, or NixOS Foundation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/gallery.js"></script>
+</body>
+</html>

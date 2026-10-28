@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1b26;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16161e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7aa2f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bb9af7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg4)"/>
+  <!-- Wayland indicator -->
+  <text x="400" y="60" font-family="sans-serif" font-size="14" font-weight="bold" fill="#7aa2f7" text-anchor="middle">WAYLAND SESSION</text>
+  <!-- Floating windows with shadows -->
+  <rect x="80" y="100" width="300" height="200" rx="8" fill="#1f2335" stroke="#7aa2f7" stroke-width="1" filter="drop-shadow(0 10px 20px rgba(0,0,0,0.5))"/>
+  <rect x="420" y="100" width="300" height="200" rx="8" fill="#1f2335" stroke="#bb9af7" stroke-width="1" filter="drop-shadow(0 10px 20px rgba(0,0,0,0.5))"/>
+  <rect x="80" y="320" width="300" height="150" rx="8" fill="#1f2335" stroke="#e0af68" stroke-width="1" filter="drop-shadow(0 10px 20px rgba(0,0,0,0.5))"/>
+  <rect x="420" y="320" width="300" height="150" rx="8" fill="#1f2335" stroke="#9ece6a" stroke-width="1" filter="drop-shadow(0 10px 20px rgba(0,0,0,0.5))"/>
+  <!-- Window headers -->
+  <rect x="80" y="100" width="300" height="32" rx="8" fill="#24283b"/>
+  <circle cx="100" cy="116" r="5" fill="#f7768e"/>
+  <circle cx="118" cy="116" r="5" fill="#e0af68"/>
+  <circle cx="136" cy="116" r="5" fill="#9ece6a"/>
+  <rect x="420" y="100" width="300" height="32" rx="8" fill="#24283b"/>
+  <circle cx="440" cy="116" r="5" fill="#f7768e"/>
+  <circle cx="458" cy="116" r="5" fill="#e0af68"/>
+  <circle cx="476" cy="116" r="5" fill="#9ece6a"/>
+  <!-- Terminal content -->
+  <text x="110" y="160" font-family="monospace" font-size="13" fill="#c0caf5">$ kitty --version</text>
+  <text x="110" y="185" font-family="monospace" font-size="13" fill="#7aa2f7">kitty 0.32.0</text>
+  <text x="110" y="210" font-family="monospace" font-size="13" fill="#7dcfff">🌊 Wayland: true</text>
+  <text x="110" y="235" font-family="monospace" font-size="13" fill="#bb9af7">🎨 Tokyo Night</text>
+  <text x="450" y="160" font-family="monospace" font-size="13" fill="#c0caf5">$ nix-shell -p neofetch</text>
+  <text x="450" y="185" font-family="monospace" font-size="13" fill="#9ece6a">[neofetch] ████████████████</text>
+  <text x="450" y="210" font-family="monospace" font-size="13" fill="#e0af68">NixOS 24.05 (Uakari)</text>
+  <text x="450" y="235" font-family="monospace" font-size="13" fill="#7aa2f7">Kernel: 6.6.x</text>
+  <text x="400" y="480" font-family="sans-serif" font-size="18" font-weight="bold" fill="#c0caf5" text-anchor="middle">Tokyo Night Wayland — NixOS</text>
+</svg>

@@ -1,0 +1,357 @@
+/* ========================================
+   KDE Plasma Ricing Guide - Theme Styles
+   Color scheme definitions for theming
+   ======================================== */
+
+/* Theme: Nordic (Nord) */
+.theme-nordic {
+  --nord0: #2e3440;
+  --nord1: #3b4252;
+  --nord2: #434c5e;
+  --nord3: #4c566a;
+  --nord4: #d8dee9;
+  --nord5: #e5e9f0;
+  --nord6: #eceff4;
+  --nord7: #8fbcbb;
+  --nord8: #88c0d0;
+  --nord9: #81a1c1;
+  --nord10: #5e81ac;
+  --nord11: #bf616a;
+  --nord12: #d08770;
+  --nord13: #ebcb8b;
+  --nord14: #a3be8c;
+  --nord15: #b48ead;
+}
+
+/* Theme: Catppuccin Mocha */
+.theme-catppuccin {
+  --ctp-rosewater: #f5e0dc;
+  --ctp-flamingo: #f2cdcd;
+  --ctp-pink: #f5c2e7;
+  --ctp-mauve: #cba6f7;
+  --ctp-red: #f38ba8;
+  --ctp-maroon: #eba0ac;
+  --ctp-peach: #fab387;
+  --ctp-yellow: #f9e2af;
+  --ctp-green: #a6e3a1;
+  --ctp-teal: #94e2d5;
+  --ctp-sky: #89dceb;
+  --ctp-sapphire: #74c7ec;
+  --ctp-blue: #89b4fa;
+  --ctp-lavender: #b4befe;
+  --ctp-text: #cdd6f4;
+  --ctp-subtext1: #bac2de;
+  --ctp-subtext0: #a6adc8;
+  --ctp-overlay2: #9399b2;
+  --ctp-overlay1: #7f849c;
+  --ctp-overlay0: #6c7086;
+  --ctp-surface2: #585b70;
+  --ctp-surface1: #45475a;
+  --ctp-surface0: #313244;
+  --ctp-base: #1e1e2e;
+  --ctp-mantle: #181825;
+  --ctp-crust: #11111b;
+}
+
+/* Theme: Gruvbox Dark */
+.theme-gruvbox {
+  --grv-bg0: #282828;
+  --grv-bg1: #3c3836;
+  --grv-bg2: #504945;
+  --grv-bg3: #665c54;
+  --grv-bg4: #7c6f64;
+  --grv-fg0: #fbf1c7;
+  --grv-fg1: #ebdbb2;
+  --grv-fg2: #d5c4a1;
+  --grv-fg3: #bdae93;
+  --grv-fg4: #a89984;
+  --grv-red: #fb4934;
+  --grv-orange: #fe8019;
+  --grv-yellow: #fabd2f;
+  --grv-green: #b8bb26;
+  --grv-aqua: #8ec07c;
+  --grv-blue: #83a598;
+  --grv-purple: #d3869b;
+}
+
+/* Theme: Tokyo Night */
+.theme-tokyo-night {
+  --tn-bg: #1a1b26;
+  --tn-bg-alt: #16161e;
+  --tn-fg: #c0caf5;
+  --tn-comment: #565f89;
+  --tn-blue: #7aa2f7;
+  --tn-cyan: #7dcfff;
+  --tn-green: #9ece6a;
+  --tn-yellow: #e0af68;
+  --tn-red: #f7768e;
+  --tn-magenta: #bb9af7;
+  --tn-orange: #ff9e64;
+}
+
+/* Theme: Dracula */
+.theme-dracula {
+  --drac-bg: #282a36;
+  --drac-current-line: #44475a;
+  --drac-fg: #f8f8f2;
+  --drac-comment: #6272a4;
+  --drac-cyan: #8be9fd;
+  --drac-green: #50fa7b;
+  --drac-orange: #ffb86c;
+  --drac-pink: #ff79c6;
+  --drac-purple: #bd93f9;
+  --drac-red: #ff5555;
+  --drac-yellow: #f1fa8c;
+}
+
+/* Theme: Rose Pine */
+.theme-rose-pine {
+  --rp-base: #191724;
+  --rp-surface: #1f1d2e;
+  --rp-overlay: #26233a;
+  --rp-muted: #6e6a86;
+  --rp-subtle: #908caa;
+  --rp-text: #e0def4;
+  --rp-love: #eb6f92;
+  --rp-gold: #f6c177;
+  --rp-rose: #ebbcba;
+  --rp-pine: #31748f;
+  --rp-foam: #9ccfd8;
+  --rp-iris: #c4a7e7;
+  --rp-highlight-low: #21202e;
+  --rp-highlight-med: #403d52;
+  --rp-highlight-high: #524f67;
+}
+
+/* Syntax Highlighting (Prism-like) */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--color-text-muted);
+}
+
+.token.punctuation {
+  color: var(--color-text-secondary);
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--color-error);
+}
+
+.token.boolean,
+.token.number {
+  color: var(--color-accent);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--color-success);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: var(--color-primary);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--color-secondary);
+}
+
+.token.function,
+.token.class-name {
+  color: var(--color-accent);
+}
+
+.token.regex,
+.token.important {
+  color: var(--color-warning);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* Line highlighting */
+.line-highlight {
+  background-color: var(--color-bg-hover);
+  border-radius: var(--radius-sm);
+  margin: 0 -var(--space-md);
+  padding: 0 var(--space-md);
+  display: block;
+}
+
+/* Code block line numbers */
+pre[class*="language-"] {
+  position: relative;
+  padding-left: 3rem;
+  counter-reset: line;
+}
+
+pre[class*="language-"] code {
+  position: relative;
+}
+
+pre[class*="language-"] .line-numbers {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2.5rem;
+  text-align: right;
+  padding: var(--space-md) var(--space-sm);
+  border-right: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  user-select: none;
+}
+
+pre[class*="language-"] .line-numbers span {
+  display: block;
+  line-height: 1.5;
+  counter-increment: line;
+}
+
+pre[class*="language-"] .line-numbers span::before {
+  content: counter(line);
+}
+
+/* Copy button for code blocks */
+.code-block-wrapper {
+  position: relative;
+}
+
+.code-copy-btn {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  opacity: 0;
+  transition: all var(--transition-fast);
+  color: var(--color-text-muted);
+}
+
+.code-block-wrapper:hover .code-copy-btn {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-primary);
+}
+
+.code-copy-btn.copied {
+  color: var(--color-success);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) var(--color-bg);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-hover);
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .theme-toggle,
+  .site-header,
+  .site-footer,
+  .btn,
+  .nav-toggle,
+  .sidebar-toggle,
+  .filter-btn,
+  .modal-overlay {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  pre, code {
+    background: #f5f5f5 !important;
+    color: black !important;
+  }
+}
